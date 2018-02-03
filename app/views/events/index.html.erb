@@ -4,3 +4,10 @@
 <br>
 <br>
 <a href='/events/new'>Event 새로 만들기</a>
+
+<% @events.each do |e| %>
+  <div style='border: 1px solid black;'>
+    <div><%= e.date %></div>
+    <div><%= e.title %></div>
+  </div>
+<% end %>
