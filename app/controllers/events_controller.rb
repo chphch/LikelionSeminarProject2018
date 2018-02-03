@@ -6,4 +6,8 @@ class EventsController < ApplicationController
   def new
     render 'new'
   end
+
+  def create
+    redirect_to action: 'index'
+  end
 end
