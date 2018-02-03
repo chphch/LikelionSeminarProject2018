@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   post '/feeds', to: 'feeds#create'
   delete '/feeds/:id', to: 'feeds#destroy'
 
+  get '/events', to: 'events#index'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
