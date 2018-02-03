@@ -1,5 +1,6 @@
 class FeedsController < ApplicationController
   def index
+    @feeds = Feed.all
     render 'index'
   end
 

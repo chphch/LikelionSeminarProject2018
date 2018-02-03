@@ -1,2 +1,9 @@
 <h1>Feed Page</h1>
 <a href='/feeds/new'>Feed 새로 만들기</a>
+
+<% @feeds.each do |f| %>
+  <div style='border: 1px solid black;'>
+    <div><%= f.title %></div>
+    <div><%= f.content %></div>
+  </div>
+<% end %>
