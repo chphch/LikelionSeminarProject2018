@@ -45,4 +45,8 @@ class FeedsController < ApplicationController
 
     redirect_to action: 'index'
   end
+
+  def destroy_comment
+
+  end
 end

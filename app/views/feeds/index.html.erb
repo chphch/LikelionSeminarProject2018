@@ -18,6 +18,7 @@
         <% f.feed_comments.each do |c| %>
           <div>
             <%= c.content %>
+            <%=link_to '삭제', "/feeds/#{f.id}/comments/#{c.id}", method: :delete %>
           </div>
         <% end %>
       </div>
