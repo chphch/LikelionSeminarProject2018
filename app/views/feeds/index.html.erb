@@ -12,5 +12,11 @@
     </div>
     <div><%= f.title %></div>
     <div><%= f.content %></div>
+    <div>
+      <form action='/feeds/<%=f.id%>/comments' method='POST'>
+        <input type='text' name='content'/>
+        <button>댓글 작성</button>
+      </form>
+    </div>
   </div>
 <% end %>
