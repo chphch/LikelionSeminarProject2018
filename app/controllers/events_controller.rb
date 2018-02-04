@@ -40,5 +40,9 @@ class EventsController < ApplicationController
   end
 
   def destroy_comment
+    comment_id = params[:comment_id]
+    EventComment.destroy(comment_id)
+
+    redirect_to action: 'index'
   end
 end
