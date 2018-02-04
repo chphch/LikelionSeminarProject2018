@@ -28,5 +28,21 @@ class FeedsController < ApplicationController
   end
 
   def create_comment
+    feed_id = params[:id]
+    content = params[:content]
+
+    feed = Feed.find(feed_id)
+    new_comment = feed.feed_comments.new
+    new_comment.content = content
+    new_comment.save
+=begin
+동일한 일을 하는 코드
+    new_comment = FeedComment.new
+    new_comment.feed_id = feed_id
+    new_comment.content = content
+    new_comment.save
+=end
+
+    redirect_to action: 'index'
   end
 end
