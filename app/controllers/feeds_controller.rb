@@ -19,4 +19,8 @@ class FeedsController < ApplicationController
 
     redirect_to action: 'index'
   end
+
+  def destroy
+
+  end
 end
