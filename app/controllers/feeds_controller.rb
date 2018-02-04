@@ -1,4 +1,5 @@
 class FeedsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @feeds = Feed.all
     render 'index'
