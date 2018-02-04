@@ -21,5 +21,9 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    event_id = params[:id]
+    Event.destroy(event_id)
+
+    redirect_to action: 'index'
   end
 end
