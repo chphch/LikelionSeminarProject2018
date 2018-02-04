@@ -47,6 +47,9 @@ class FeedsController < ApplicationController
   end
 
   def destroy_comment
+    comment_id = params[:comment_id]
+    FeedComment.destroy(comment_id)
 
+    redirect_to action: 'index'
   end
 end
