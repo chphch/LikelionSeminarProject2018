@@ -26,4 +26,7 @@ class EventsController < ApplicationController
 
     redirect_to action: 'index'
   end
+
+  def create_comment
+  end
 end

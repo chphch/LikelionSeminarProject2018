@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/events/new', to: 'events#new'
   post '/events', to: 'events#create'
   delete '/events/:id', to: 'events#destroy'
+  post '/events/:id/comments', to: 'events#create_comment'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
