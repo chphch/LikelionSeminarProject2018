@@ -21,6 +21,9 @@ class FeedsController < ApplicationController
   end
 
   def destroy
+    feed_id = params[:id]
+    Feed.destroy(feed_id)
 
+    redirect_to action: 'index'
   end
 end
