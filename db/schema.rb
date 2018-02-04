@@ -30,16 +30,20 @@ ActiveRecord::Schema.define(version: 20180204172002) do
   create_table "feed_comments", force: :cascade do |t|
     t.integer "feed_id"
     t.string "content"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feed_id"], name: "index_feed_comments_on_feed_id"
+    t.index ["user_id"], name: "index_feed_comments_on_user_id"
   end
 
   create_table "feeds", force: :cascade do |t|
     t.string "title"
     t.text "content"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_feeds_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
