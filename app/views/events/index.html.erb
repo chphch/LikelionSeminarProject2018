@@ -7,6 +7,9 @@
 
 <% @events.each do |e| %>
   <div style='border: 1px solid black;'>
+    <div>
+      <%=link_to '삭제', "/events/#{e.id}", method: :delete %>
+    </div>
     <div><%= e.date %></div>
     <div><%= e.title %></div>
   </div>
