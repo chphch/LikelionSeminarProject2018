@@ -9,6 +9,16 @@
   </head>
 
   <body>
+    <div class='header'>
+      <div class='container'>
+        <% if user_signed_in? %>
+          <%= link_to 'Sign out', '/users/sign_out', method: :delete  %>
+        <% else %>
+          <a href="/users/sign_in"> Sign in </a>
+          <a href="/users/sign_up"> Sign up </a>
+        <% end %>
+      </div>
+    </div>
     <%= yield %>
   </body>
 </html>
