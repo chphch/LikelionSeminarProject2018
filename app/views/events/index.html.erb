@@ -12,11 +12,21 @@
     </div>
     <div><%= e.date %></div>
     <div><%= e.title %></div>
-    <div>
-      <form action='/events/<%=e.id%>/comments' method='POST'>
-        <input type='text' name='content'/>
-        <button>댓글 작성</button>
-      </form>
+    <div style='border: 1px solid gray'>
+      <div>
+        <strong>댓글</strong>
+        <% e.event_comments.each do |c| %>
+          <div>
+            <%= c.content %>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <form action='/events/<%=e.id%>/comments' method='POST'>
+          <input type='text' name='content'/>
+          <button>댓글 작성</button>
+        </form>
+      </div>
     </div>
   </div>
 <% end %>
