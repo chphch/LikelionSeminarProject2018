@@ -12,11 +12,21 @@
     </div>
     <div><%= f.title %></div>
     <div><%= f.content %></div>
-    <div>
-      <form action='/feeds/<%=f.id%>/comments' method='POST'>
-        <input type='text' name='content'/>
-        <button>댓글 작성</button>
-      </form>
+    <div style='border: 1px solid gray'>
+      <div>
+        <strong>댓글</strong>
+        <% f.feed_comments.each do |c| %>
+          <div>
+            <%= c.content %>
+          </div>
+        <% end %>
+      </div>
+      <div>
+        <form action='/feeds/<%=f.id%>/comments' method='POST'>
+          <input type='text' name='content'/>
+          <button>댓글 작성</button>
+        </form>
+      </div>
     </div>
   </div>
 <% end %>
