@@ -57,7 +57,16 @@ class FeedsController < ApplicationController
   end
 
   def like
-    FeedLike.create(user_id: current_user.id, feed_id: params[:id])
+    feed_like_hash = {user_id: current_user.id, feed_id: params[:id]}
+    # 아래 두 코드는 같음
+    # like = FeedLike.where(user_kd: current_user.id, feed_id: params[:id])
+    like = FeedLike.where(feed_like_hash)
+    if like.empty?
+      FeedLike.create(feed_like_hash)
+    else
+      like.destroy_all
+    end
+
     redirect_to action: 'index'
   end
 end
