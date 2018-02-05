@@ -12,12 +12,14 @@
     </div>
     <div><%= e.date %></div>
     <div><%= e.title %></div>
+    <div><%= e.user.email%></div>
     <div style='border: 1px solid gray'>
       <div>
         <strong>댓글</strong>
         <% e.event_comments.each do |c| %>
           <div>
             <%= c.content %>
+            <%= c.user.email%>
             <%=link_to '삭제', "/events/#{e.id}/comments/#{c.id}", method: :delete %>
           </div>
         <% end %>
