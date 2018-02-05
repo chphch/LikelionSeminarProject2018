@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180204172002) do
+ActiveRecord::Schema.define(version: 20180205140414) do
 
   create_table "event_comments", force: :cascade do |t|
     t.integer "event_id"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20180204172002) do
     t.datetime "updated_at", null: false
     t.index ["feed_id"], name: "index_feed_comments_on_feed_id"
     t.index ["user_id"], name: "index_feed_comments_on_user_id"
+  end
+
+  create_table "feed_likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "feed_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_feed_likes_on_feed_id"
+    t.index ["user_id"], name: "index_feed_likes_on_user_id"
   end
 
   create_table "feeds", force: :cascade do |t|

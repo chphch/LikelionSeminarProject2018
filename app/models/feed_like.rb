@@ -1,0 +1,2 @@
+class FeedLike < ApplicationRecord
+end
