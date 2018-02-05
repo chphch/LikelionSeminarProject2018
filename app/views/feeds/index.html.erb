@@ -8,6 +8,7 @@
 <% @feeds.each do |f| %>
   <div style='border: 1px solid black;'>
     <div>
+      <%=link_to '좋아요', "/feeds/#{f.id}/like" %>
       <%=link_to '삭제', "/feeds/#{f.id}", method: :delete %>
     </div>
     <div><%= f.title %></div>

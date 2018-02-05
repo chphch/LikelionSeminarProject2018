@@ -55,4 +55,9 @@ class FeedsController < ApplicationController
 
     redirect_to action: 'index'
   end
+
+  def like
+    FeedLike.create(user_id: current_user.id, feed_id: params[:id])
+    redirect_to action: 'index'
+  end
 end
