@@ -16,6 +16,7 @@
     <div style='border: 1px solid gray'>
       <div>
         <strong>댓글</strong>
+        <div><%= e.commenting_users.distinct.size %>명이 댓글을 달았습니다</div>
         <% e.event_comments.each do |c| %>
           <div>
             <%= c.content %>
