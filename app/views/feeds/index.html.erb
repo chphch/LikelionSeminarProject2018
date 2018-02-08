@@ -1,4 +1,5 @@
 <h1>Feed Page</h1>
+<div>팔로잉: <%= current_user.followings.size =%>명</div>
 <a href='/feeds'>Feed Page</a>
 <a href='/events'>Event Page</a>
 <br>
@@ -19,7 +20,9 @@
     <div><%= f.content %></div>
     <div><%= f.user.email%></div>
     <div><%= f.user.name%></div>
-    <%=link_to '글쓴이를 팔로우', "/follows/#{f.user.id}", method: :get %>
+    <% unless current_user.followings.include? f.user %>
+      <%=link_to '글쓴이를 팔로우', "/follows/#{f.user.id}", method: :get %>
+    <% end %>
     <div style='border: 1px solid gray'>
       <div>
         <strong>댓글</strong>
