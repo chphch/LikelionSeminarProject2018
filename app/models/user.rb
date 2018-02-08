@@ -20,4 +20,8 @@ class User < ApplicationRecord
   # follows = Follow.where(follower_id: self.id)
   has_many :follows, foreign_key: :follower_id
   has_many :followings, through: :follows, source: :followed
+
+  def request_follow(followed)
+    Follow.create(follower_id: self.id, followed_id: followed.id)
+  end
 end

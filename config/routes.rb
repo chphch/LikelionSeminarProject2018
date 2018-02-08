@@ -15,5 +15,7 @@ Rails.application.routes.draw do
   post '/events/:id/comments', to: 'events#create_comment'
   delete '/events/:id/comments/:comment_id', to: 'events#destroy_comment'
 
+  get '/follows/:followed_id', to: 'follows#create'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

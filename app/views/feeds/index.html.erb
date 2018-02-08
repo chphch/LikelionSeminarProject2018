@@ -19,6 +19,7 @@
     <div><%= f.content %></div>
     <div><%= f.user.email%></div>
     <div><%= f.user.name%></div>
+    <%=link_to '글쓴이를 팔로우', "/follows/#{f.user.id}", method: :get %>
     <div style='border: 1px solid gray'>
       <div>
         <strong>댓글</strong>
