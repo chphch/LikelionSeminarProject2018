@@ -21,6 +21,11 @@ class User < ApplicationRecord
   has_many :follows, foreign_key: :follower_id
   has_many :followings, through: :follows, source: :followed
 
+  # Followers stands for users who follow me according to Twitter's convention
+  # followeds = Follow.where(followed_id: self.id)
+  has_many :followeds, class_name: :Follow, foreign_key: :followed_id
+  has_many :followers, through: :followeds, source: :follower
+
   def request_follow(followed)
     Follow.create(follower_id: self.id, followed_id: followed.id)
   end
