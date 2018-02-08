@@ -15,4 +15,9 @@ class User < ApplicationRecord
   # Users : FeedLikes : Feeds M:N Relations
   has_many :feed_likes
   has_many :liked_feeds, through: :feed_likes, source: :feed
+
+  # Followings stands for users who I am following according to Twitter's convention
+  # follows = Follow.where(follower_id: self.id)
+  has_many :follows, foreign_key: :follower_id
+  has_many :followings, through: :follows, source: :followed
 end
