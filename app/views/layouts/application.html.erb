@@ -43,24 +43,24 @@
 
   <body>
     <% if !user_signed_in? %>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-50">
+    <div class="mdl-layout mdl-layout--fixed-header mdl-color--grey-50">
       
-      <!-- Header -->
-      <header class="mdl-layout__header mdl-layout__header--waterfall">
-        <div class="mdl-layout__header-row">
+      <!-- Header: 비회원 -->
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row signed-out">
           <span class="mdl-layout-title">Likenew</span>
+          <div class="mdl-layout-spacer"></div>
+          <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="/users/sign_in">로그인</a>
+            <a class="mdl-navigation__link" href="/users/sign_up">회원가입</a>
+          </nav>
         </div>
-        <div class="mdl-layout-spacer"></div>
-        <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="/users/sign_in">로그인</a>
-          <a class="mdl-navigation__link" href="/users/sign_up">회원가입</a>
-        </nav>
       </header> 
         
     <% else %>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header is-upgraded mdl-color--grey-50">
 
-      <!-- Header -->
+      <!-- Header: 회원 -->
       <header class="mdl-layout__header mdl-layout__header--waterfall">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title"><%= controller_name %></span>
@@ -80,11 +80,13 @@
       <!-- Drawer -->
       <div class="mdl-layout__drawer mdl-color--white">
         <span class="mdl-layout-title">Likenew</span>
+        <!-- Navigation -->
         <nav class="mdl-navigation">
           <%= link_to "피드", feeds_path, :class => ["mdl-navigation__link", current_class?(feeds_path)].join(" ") %>
           <%= link_to "이벤트", events_path, :class => ["mdl-navigation__link", current_class?(events_path)].join(" ") %>
           <hr>
         </nav>
+        <!-- User List -->
         <nav class="mdl-navigation">
           <a class="mdl-navigation__link mdl-navigation__link--disabled pt-0 pb-0">유저 (<%= User.count %>명)</a>
           <ul class="mdl-list">

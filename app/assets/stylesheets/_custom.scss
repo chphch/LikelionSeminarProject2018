@@ -109,3 +109,7 @@
     max-height: calc(100% - 222px);
   }
 }
+
+.mdl-layout__header-row.signed-out {
+  padding-left: 24px;
+}
