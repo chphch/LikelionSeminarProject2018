@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Likenew</title>
     <%= csrf_meta_tags %>
-
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- SEO -->
+    <title>Likenew</title>
+    <meta name="description" content="설명을 적으세요 (160자 이내)">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/page.html">
+    <meta property="og:title" content="Content Title">
+    <meta property="og:image" content="https://example.com/image.jpg">
+    <meta property="og:description" content="Description Here">
+    <meta property="og:site_name" content="Site Name">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@site_account">
+    <meta name="twitter:creator" content="@individual_account">
+    <meta name="twitter:url" content="https://example.com/page.html">
+    <meta name="twitter:title" content="Content Title">
+    <meta name="twitter:description" content="Content description less than 200 characters">
+    <meta name="twitter:image" content="https://example.com/image.jpg">
+    <!-- Favicons -->
+  <!--
+    <link rel="icon" type="image/png" href="https://example.com/favicon.png">
+    <link rel="apple-touch-icon" href="/custom-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-config" content="browserconfig.xml" />
+  -->
+    <!-- Avoid Duplicate Content -->
+    <link rel="canonical" href="http://example.com/2017/09/a-new-article-to-read.html">
+    <!-- Stylesheets -->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
@@ -20,5 +50,7 @@
       </div>
     </div>
     <%= yield %>
+    
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>
