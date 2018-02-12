@@ -113,3 +113,55 @@
 .mdl-layout__header-row.signed-out {
   padding-left: 24px;
 }
+
+.mdl-button--fab {
+  position: fixed;
+  bottom: 1.5em;
+  right: 1.5em;
+  z-index: 999;
+  @include shadow-3dp();
+}
+
+.mdl-list__item.comment {
+  min-height: 24px;
+  padding: 5px 16px;
+}
+
+.mdl-layout__content {
+  min-height: calc(100vh - 64px);
+}
+
+/*
+ * Masonry
+ */
+
+.js-grid {
+  margin: 20px;
+}
+.mdl-card {
+  margin-bottom: 20px;
+}
+.mdl-card, .js-grid-sizer {
+  width: 32%;
+}
+.js-gutter-sizer {
+  width: 2%
+}
+
+@media (min-width: $grid-tablet-breakpoint) and (max-width: $grid-desktop-breakpoint - 1) {
+  .mdl-card, .js-grid-sizer {
+    width: 48.5%
+  }
+  .js-gutter-sizer {
+    width: 3%
+  }
+}
+
+@media (max-width: $grid-tablet-breakpoint - 1) {
+  .mdl-card, .js-grid-sizer {
+    width: 100%
+  }
+  .js-gutter-sizer {
+    width: 0
+  } 
+}
