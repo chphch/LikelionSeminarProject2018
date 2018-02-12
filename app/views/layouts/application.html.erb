@@ -34,8 +34,9 @@
   -->
     <!-- Avoid Duplicate Content -->
     <link rel="canonical" href="http://example.com/2017/09/a-new-article-to-read.html">
-    <!-- Stylesheets -->
+    <!-- Stylesheets & Javascripts -->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
@@ -50,7 +51,6 @@
       </div>
     </div>
     <%= yield %>
-    
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </body>
 </html>
