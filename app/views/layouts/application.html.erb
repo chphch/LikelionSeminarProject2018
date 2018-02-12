@@ -34,23 +34,102 @@
   -->
     <!-- Avoid Duplicate Content -->
     <link rel="canonical" href="http://example.com/2017/09/a-new-article-to-read.html">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Stylesheets & Javascripts -->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div class='header'>
-      <div class='container'>
-        <% if user_signed_in? %>
-          <%= link_to 'Sign out', '/users/sign_out', method: :delete  %>
-        <% else %>
-          <a href="/users/sign_in"> Sign in </a>
-          <a href="/users/sign_up"> Sign up </a>
-        <% end %>
-      </div>
-    </div>
-    <%= yield %>
+    <% if !user_signed_in? %>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-color--grey-50">
+      
+      <!-- Header -->
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Likenew</span>
+        </div>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="/users/sign_in">로그인</a>
+          <a class="mdl-navigation__link" href="/users/sign_up">회원가입</a>
+        </nav>
+      </header> 
+        
+    <% else %>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header is-upgraded mdl-color--grey-50">
 
+      <!-- Header -->
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title"><%= controller_name %></span>
+          <div class="mdl-layout-spacer"></div>
+          <button id="account-menu" class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">account_circle</i>
+          </button>
+
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect " for="account-menu">
+            <li disabled class="mdl-menu__item"><%= current_user.name %>님</li>
+            <%= link_to '내 계정', '/users/edit', :class => 'mdl-menu__item' %>
+            <%= link_to '로그아웃', '/users/sign_out', method: :delete, :class => 'mdl-menu__item' %>
+          </ul>
+        </div>
+      </header>
+
+      <!-- Drawer -->
+      <div class="mdl-layout__drawer mdl-color--white">
+        <span class="mdl-layout-title">Likenew</span>
+        <nav class="mdl-navigation">
+          <%= link_to "피드", feeds_path, :class => ["mdl-navigation__link", current_class?(feeds_path)].join(" ") %>
+          <%= link_to "이벤트", events_path, :class => ["mdl-navigation__link", current_class?(events_path)].join(" ") %>
+          <hr>
+        </nav>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link mdl-navigation__link--disabled pt-0 pb-0">유저 (<%= User.count %>명)</a>
+          <ul class="mdl-list">
+            <% User.all.each do |u| %>
+              <% if u == current_user %>
+                <!-- 본인 -->
+                <li class="mdl-list__item mdl-list__item--two-line">
+                  <span class="mdl-list__item-primary-content">
+                    <i class="material-icons mdl-list__item-avatar">person</i>
+                    <strong><%= current_user.name %></strong>
+                    <span class="mdl-list__item-sub-title">팔로잉 <%= current_user.followings.size %> 팔로워 <%= current_user.followers.size %></span>
+                  </span>
+                </li>
+              
+              <% else %>
+                <!-- 타인 -->
+                <li class="mdl-list__item">
+                  <span class="mdl-list__item-primary-content">
+                    <i class="material-icons mdl-list__item-avatar">person</i>
+                    <span><%= u.name %></span>
+                  </span>
+                  <span class="mdl-list__item-secondary-content">
+                    <% if current_user.followings.include? u %>
+                      <%=link_to "/follows/#{u.id}", method: :delete, :class => "mdl-list__item-secondary-action" do %>
+                        <i class="material-icons">person_add</i>
+                      <% end %>
+                    <% else %>
+                      <%=link_to "/follows/#{u.id}", method: :get, :class => "mdl-list__item-secondary-action mdl-color-text--grey-500" do %>
+                        <i class="material-icons">person_add</i>
+                      <% end %>
+                    <% end %>
+                  </span>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+      <% end %>
+
+      <!-- Content -->
+      <main class="mdl-layout__content">
+        <%= yield %>
+      </main>
+
+    </div>
   </body>
 </html>
