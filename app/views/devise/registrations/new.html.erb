@@ -1,35 +1,49 @@
-<h2>Sign up</h2>
+<div class="center-absolute center-valign">
+  <div class="mdl-grid sessions no-margin">
+    <div class="mdl-color--red-100 mdl-shadow--2dp mdl-cell mdl-cell--12-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop mdl-cell--3-offset-desktop center-align">
+      <%= devise_error_messages! %>
+    </div>
+    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop mdl-cell--3-offset-desktop">
+      <div class="mdl-card__title center-align">
+        <h3 class="mdl-typography--font-bold mb-0">회원가입</h3>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {:class => "mdl-cell mdl-cell--12-col"}) do |f| %>
+            <div class="mdl-grid">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-textfield mdl-js-textfield pt-0">
+                <%= f.label :email, :class => "mdl-textfield__label" %><br />
+                <%= f.email_field :email, autofocus: true, :class => "mdl-textfield__input" %>
+              </div>
+              
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-textfield mdl-js-textfield pt-0">
+                <%= f.label :name, :class => "mdl-textfield__label" %><br />
+                <%= f.text_field :name, autocomplete: "off", :class => "mdl-textfield__input" %>
+              </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-textfield mdl-js-textfield pt-0 right-align">
+                <%= f.label :password, :class => "mdl-textfield__label" %>
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %>자 이상)</em>
+                <% end %>
+                <%= f.password_field :password, autocomplete: "off", :class => "mdl-textfield__input" %>
+              </div>
+
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-textfield mdl-js-textfield pt-0">
+                <%= f.label :password_confirmation, :class => "mdl-textfield__label" %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "off", :class => "mdl-textfield__input" %>
+              </div>
+
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet left-align">
+                <%= render "devise/shared/links" %>
+              </div>
+            </div>
+
+            <div class="mdl-grid">
+              <%= f.submit "가입 완료", :class => "mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-cell mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" %>
+            </div>
+
+          <% end %>
+          
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autocomplete: "off" %>
-  </div>
-
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

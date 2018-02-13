@@ -15,8 +15,8 @@
 //= require_tree .
 //= require material.min
 
-let menu;
 document.addEventListener("turbolinks:load", function() { 
+	// init Masonry
 	if (document.querySelector(".js-grid")) {
 		let msnry = new Masonry( '.js-grid', {
 		    itemSelector: '.mdl-card',
@@ -34,7 +34,6 @@ document.addEventListener("turbolinks:load", function() {
 	    msnry.layout();
 	  }, 100 );
 	};
-	if (document.querySelector(".mdl-menu")) {
-		menu = new componentHandler.upgradeElement(document.querySelector(".mdl-menu"));
-	};
+	// init MDL
+	componentHandler.upgradeDom();
 });

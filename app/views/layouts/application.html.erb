@@ -110,10 +110,13 @@
                   </span>
                   <span class="mdl-list__item-secondary-content">
                     <% if current_user.followings.include? u %>
-                      <%=link_to "/follows/#{u.id}", method: :delete, :class => "mdl-list__item-secondary-action" do %>
+                      <a class="mdl-list__item-secondary-action">
+                        <i class="material-icons">person_add</i>
+                      </a>
+<!--                       <%=link_to "/follows/#{u.id}", method: :delete, :class => "mdl-list__item-secondary-action" do %>
                         <i class="material-icons">person_add</i>
                       <% end %>
-                    <% else %>
+ -->                    <% else %>
                       <%=link_to "/follows/#{u.id}", method: :get, :class => "mdl-list__item-secondary-action mdl-color-text--grey-500" do %>
                         <i class="material-icons">person_add</i>
                       <% end %>
