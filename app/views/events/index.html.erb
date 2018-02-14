@@ -1,36 +1,42 @@
-<h1>Event Page</h1>
-<a href='/feeds'>Feed Page</a>
-<a href='/events'>Event Page</a>
-<br>
-<br>
-<a href='/events/new'>Event 새로 만들기</a>
+<div class="js-grid">
+  <div class="js-grid-sizer"></div>
+  <div class="js-gutter-sizer"></div>
+  <!-- 이 윗부분은 바꾸지 말아주세요. 카드를 정렬해주는 기능을 합니다 -->
+  <h1>Event Page</h1>
+  <a href='/feeds'>Feed Page</a>
+  <a href='/events'>Event Page</a>
+  <br>
+  <br>
+  <a href='/events/new'>Event 새로 만들기</a>
 
-<% @events.each do |e| %>
-  <div style='border: 1px solid black;'>
-    <div>
-      <%=link_to '삭제', "/events/#{e.id}", method: :delete %>
-    </div>
-    <div><%= e.date %></div>
-    <div><%= e.title %></div>
-    <div><%= e.user.email%></div>
-    <div style='border: 1px solid gray'>
+  <% @events.each do |e| %>
+    <div style='border: 1px solid black;'>
       <div>
-        <strong>댓글</strong>
-        <div><%= e.commenting_users.distinct.size %>명이 댓글을 달았습니다</div>
-        <% e.event_comments.each do |c| %>
-          <div>
-            <%= c.content %>
-            <%= c.user.email%>
-            <%=link_to '삭제', "/events/#{e.id}/comments/#{c.id}", method: :delete %>
-          </div>
-        <% end %>
+        <%=link_to '삭제', "/events/#{e.id}", method: :delete %>
       </div>
-      <div>
-        <form action='/events/<%=e.id%>/comments' method='POST'>
-          <input type='text' name='content'/>
-          <button>댓글 작성</button>
-        </form>
+      <div><%= e.date %></div>
+      <div><%= e.title %></div>
+      <div><%= e.user.email%></div>
+      <div style='border: 1px solid gray'>
+        <div>
+          <strong>댓글</strong>
+          <div><%= e.commenting_users.distinct.size %>명이 댓글을 달았습니다</div>
+          <% e.event_comments.each do |c| %>
+            <div>
+              <%= c.content %>
+              <%= c.user.email%>
+              <%=link_to '삭제', "/events/#{e.id}/comments/#{c.id}", method: :delete %>
+            </div>
+          <% end %>
+        </div>
+        <div>
+          <form action='/events/<%=e.id%>/comments' method='POST'>
+            <input type='text' name='content'/>
+            <button>댓글 작성</button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
+

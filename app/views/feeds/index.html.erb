@@ -14,7 +14,10 @@
       </button>
     </div>
   </a>
-  <!-- Post -->
+
+  <!-- 
+    Post 
+  -->
   <% @feeds.each do |f| %>
   <!-- 글 내용 및 정보 -->
   <div class="mdl-card">
@@ -31,7 +34,10 @@
       <span class="mdl-typography--body-2"><%= f.title %></span>
       <p><%= f.content %></p>
     </div>
-    <!-- 댓글 -->
+
+    <!-- 
+      댓글 
+    -->
     <div class="mdl-card__actions mdl-card--border pb-0">
       <!-- 더보기 만들면 적용-->
       <% if f.feed_comments.count > 1 %>
@@ -74,7 +80,10 @@
         </form>
       </div>
     </div>
-    <!-- 도구모음 -->
+
+    <!-- 
+      도구모음 
+    -->
     <div class="mdl-card__menu">
 
       <!-- 내 글이면 -->
@@ -120,7 +129,9 @@
 
 </div>
 
-<!-- Create -->
+<!-- 
+  Create 
+-->
 <a href="/feeds/new" id="js-new-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--gradient">
   <i class="material-icons">create</i>
 </a>
