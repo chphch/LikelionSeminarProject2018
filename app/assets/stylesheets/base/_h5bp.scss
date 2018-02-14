@@ -104,21 +104,85 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+a {
+    text-decoration: none;
+}
 
+// Text Align
+.left-align {
+  text-align: left;
+}
+.right-align {
+  text-align: right
+}
+.center, .center-align {
+  text-align: center;
+}
 
+// No Text Select
+.no-select {
+  user-select: none;
+}
 
+.circle {
+  border-radius: 50%;
+  overflow: hidden;
+}
 
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.center-valign {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+.center-absolute {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
+.truncate {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
+.no-border {
+  border-color: transparent !important;
+}
 
+.no-padding {
+  padding: 0 !important;
+}
 
+.no-margin {
+  margin: 0 !important; 
+}
 
+.pt-0 {
+  padding-top: 0 !important;
+}
 
+.pb-0 {
+  padding-bottom: 0 !important;
+}
 
+.mt-0 {
+  margin-top: 0 !important;
+}
 
-
+.mb-0 {
+  margin-bottom: 0 !important;
+}
 
 /* ==========================================================================
    Helper classes

@@ -126,7 +126,10 @@ $palette-deep-purple:
 "179,136,255"
 "124,77,255"
 "101,31,255"
-"98,0,234";
+"98,0,234"
+"203,201,246"
+"158,170,204"
+"65,80,120";
 
 $palette-deep-purple-50: nth($palette-deep-purple, 1);
 $palette-deep-purple-100: nth($palette-deep-purple, 2);
@@ -142,6 +145,9 @@ $palette-deep-purple-A100: nth($palette-deep-purple, 11);
 $palette-deep-purple-A200: nth($palette-deep-purple, 12);
 $palette-deep-purple-A400: nth($palette-deep-purple, 13);
 $palette-deep-purple-A700: nth($palette-deep-purple, 14);
+$palette-deep-purple-C100: nth($palette-deep-purple, 15);
+$palette-deep-purple-C300: nth($palette-deep-purple, 16);
+$palette-deep-purple-C700: nth($palette-deep-purple, 17);
 
 $palette-indigo:
 "232,234,246"

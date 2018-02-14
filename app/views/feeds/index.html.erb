@@ -1,10 +1,23 @@
 <div class="js-grid">
   <div class="js-grid-sizer"></div>
   <div class="js-gutter-sizer"></div>
+  <a href="/feeds/new" class="mdl-card create">
+    <div class="mdl-card__title mdl-color-text--white">
+      <div class="mdl-card__title-text center-valign">
+        <div class="mdl-typography--subhead">새 글 작성하러 가기</div>
+        <div class="mdl-typography--caption-color-contrast">Create new post</div>
+      </div>
+    </div>
+    <div class="mdl-card__menu">
+      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-50">
+        <i class="material-icons">open_in_new</i>
+      </button>
+    </div>
+  </a>
   <!-- Post -->
   <% @feeds.each do |f| %>
   <!-- 글 내용 및 정보 -->
-  <div class="mdl-card mdl-shadow--2dp">
+  <div class="mdl-card">
     <div class="mdl-card__supporting-text">
       <ul class="mdl-list mt-0 no-padding">
         <li class="mdl-list__item mdl-list__item--two-line no-padding">
@@ -20,10 +33,12 @@
     </div>
     <!-- 댓글 -->
     <div class="mdl-card__actions mdl-card--border pb-0">
-      <!-- 더보기 만들면 -->
-      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-        댓글 더보기
-      </a>
+      <!-- 더보기 만들면 적용-->
+      <% if f.feed_comments.count > 1 %>
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          댓글 더보기
+        </a>
+      <% end %>
       <!-- 댓글 목록 -->
       <ul class="mdl-list no-margin no-padding">
         <% f.feed_comments.each do |c| %>
@@ -36,7 +51,7 @@
           </span>
           <% if c.user == current_user %>
             <span class="mdl-list__item-secondary-content">
-              <%=link_to "/feeds/#{f.id}/comments/#{c.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+              <%=link_to "/feeds/#{f.id}/comments/#{c.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
                 <i class="material-icons">delete</i>
               <% end %>
             </span>
@@ -45,14 +60,12 @@
         <% end %>
       </ul>
       <!-- 댓글 작성 -->
-      <div class="mdl-grid pb-0 pt-0">
-        <form class="mdl-cell mdl-cell--12-col mb-0 mt-0" action="/feeds/<%=f.id%>/comments" method="POST">
+      <div class="mdl-grid pt-0 pb-0">
+        <form class="mdl-cell mdl-cell--12-col mt-0 mb-0" action="/feeds/<%=f.id%>/comments" method="POST">
           <div class="mdl-grid--no-spacing">
-            <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-              <textarea class="mdl-textfield__input" type="text" rows= "1" name="content" ></textarea>
-              <label class="mdl-textfield__label" for="sample5">댓글 작성하기</label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-cell--2-col-desktop mdl-cell--1-col-tablet mdl-cell--1-col-phone mdl-cell--3-offset-phone">
+            <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col-desktop mdl-cell--5-col-tablet mdl-cell--3-col-phone">
+              <input class="mdl-textfield__input" id="content" type="text" name="content">
+              <label class="mdl-textfield__label" for="content">댓글 작성하기</label>
               <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
                 등록
               </button>
@@ -68,10 +81,10 @@
       <% if f.user == current_user %>
 
         <!-- 수정 -->
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
           <i class="material-icons">edit</i>
         </button>
-        <%=link_to "/feeds/#{f.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+        <%=link_to "/feeds/#{f.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
           <i class="material-icons">delete</i>
         <% end %>
 
@@ -80,21 +93,21 @@
 
         <!-- 팔로우 -->
         <% if current_user.followings.include? f.user %>
-          <%=link_to "/follows/#{f.user.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--pink-500" do %>
-            <i class="material-icons">person_add</i>
+          <%=link_to "", :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+            <i class="material-icons mdl-color-text--deep-purple-A400">person_add</i>
           <% end %>
         <% else %>
-          <%=link_to "/follows/#{f.user.id}", method: :get, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+          <%=link_to "/follows/#{f.user.id}", method: :get, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
             <i class="material-icons">person_add</i>
           <% end %>
         <% end %>
         <!-- 좋아요 -->
         <% if f.liking_users.include? current_user %>
-          <%=link_to "/feeds/#{f.id}/like", :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--pink-500" do %>
-            <i class="material-icons">favorite</i>
+          <%=link_to "/feeds/#{f.id}/like", :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+            <i class="material-icons mdl-color-text--purple-A400">favorite</i>
           <% end %>
         <% else %>
-          <%=link_to "/feeds/#{f.id}/like", :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+          <%=link_to "/feeds/#{f.id}/like", :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
             <i class="material-icons">favorite_border</i>
           <% end %>
         <% end %>
@@ -108,6 +121,6 @@
 </div>
 
 <!-- Create -->
-<a href="/feeds/new" id="js-new-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+<a href="/feeds/new" id="js-new-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--gradient">
   <i class="material-icons">create</i>
 </a>

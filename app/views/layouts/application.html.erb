@@ -43,12 +43,14 @@
 
   <body>
     <% if !user_signed_in? %>
-    <div class="mdl-layout mdl-layout--fixed-header mdl-color--grey-50">
+    <div class="mdl-layout mdl-layout--fixed-header">
       
       <!-- Header: 비회원 -->
-      <header class="mdl-layout__header">
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
         <div class="mdl-layout__header-row signed-out">
-          <span class="mdl-layout-title">Likenew</span>
+          <a href="/" class="mdl-layout-title">
+            <%= image_tag("logo.png", width: 40, alt: "Likenew") %>
+          </a>
           <div class="mdl-layout-spacer"></div>
           <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="/users/sign_in">로그인</a>
@@ -58,14 +60,14 @@
       </header> 
         
     <% else %>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header is-upgraded mdl-color--grey-50">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header is-upgraded">
 
       <!-- Header: 회원 -->
       <header class="mdl-layout__header mdl-layout__header--waterfall">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title"><%= controller_name %></span>
           <div class="mdl-layout-spacer"></div>
-          <button id="account-menu" class="mdl-button mdl-js-button mdl-button--icon">
+          <button id="account-menu" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-50">
             <i class="material-icons">account_circle</i>
           </button>
 
@@ -78,8 +80,10 @@
       </header>
 
       <!-- Drawer -->
-      <div class="mdl-layout__drawer mdl-color--white">
-        <span class="mdl-layout-title">Likenew</span>
+      <div class="mdl-layout__drawer">
+        <a href="/" class="mdl-layout-title">
+          <%= image_tag("logo.png", width: 40, alt: "Likenew") %>
+        </a>
         <!-- Navigation -->
         <nav class="mdl-navigation">
           <%= link_to "피드", feeds_path, :class => ["mdl-navigation__link", current_class?(feeds_path)].join(" ") %>
@@ -110,14 +114,14 @@
                   </span>
                   <span class="mdl-list__item-secondary-content">
                     <% if current_user.followings.include? u %>
-                      <a class="mdl-list__item-secondary-action">
+                      <a class="mdl-list__item-secondary-action mdl-color-text--deep-purple-A400">
                         <i class="material-icons">person_add</i>
                       </a>
 <!--                       <%=link_to "/follows/#{u.id}", method: :delete, :class => "mdl-list__item-secondary-action" do %>
                         <i class="material-icons">person_add</i>
                       <% end %>
  -->                    <% else %>
-                      <%=link_to "/follows/#{u.id}", method: :get, :class => "mdl-list__item-secondary-action mdl-color-text--grey-500" do %>
+                      <%=link_to "/follows/#{u.id}", method: :get, :class => "mdl-list__item-secondary-action" do %>
                         <i class="material-icons">person_add</i>
                       <% end %>
                     <% end %>
