@@ -1,43 +1,64 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="center-absolute center-valign">
+  <div class="mdl-grid form no-margin">
+    <div class="mdl-color--red-100 mdl-shadow--2dp mdl-cell mdl-cell--12-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop mdl-cell--3-offset-desktop center-align">
+      <%= devise_error_messages! %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <% end %>
+    </div>
+    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop mdl-cell--3-offset-desktop">
+      <div class="mdl-card__title center-align">
+        <h3 class="mdl-typography--font-bold mb-0">회원 정보 수정</h3>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, html: {:class => "mdl-cell mdl-cell--12-col"}) do |f| %>
+            <div class="mdl-grid">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-textfield mdl-js-textfield pt-0">
+                <%= f.label :email, :class => "mdl-textfield__label" %><br>
+                <%= f.email_field :email, autofocus: true, :class => "mdl-textfield__input" %>
+              </div>
+              
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-textfield mdl-js-textfield pt-0">
+                <%= f.label :name, :class => "mdl-textfield__label" %>
+                <br>
+                <%= f.text_field :name, autocomplete: "off", :class => "mdl-textfield__input" %>
+              </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-textfield mdl-js-textfield pt-0 right-align">
+                <%= f.label :current_password, :class => "mdl-textfield__label" %>
+                <br>
+                <%= f.password_field :current_password, autocomplete: "off", :class => "mdl-textfield__input" %>
+              </div>
+
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-textfield mdl-js-textfield pt-0 right-align">
+                <%= f.label :password, :class => "mdl-textfield__label" %>
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %>자 이상)</em>
+                <% end %>
+                <%= f.password_field :password, autocomplete: "off", :class => "mdl-textfield__input" %>
+              </div>
+
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-textfield mdl-js-textfield pt-0">
+                <%= f.label :password_confirmation, :class => "mdl-textfield__label" %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "off", :class => "mdl-textfield__input" %>
+              </div>
+
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet left-align">
+                <%= render "devise/shared/links" %>
+              </div>
+            </div>
+
+            <div class="mdl-grid">
+              <%= f.submit "수정 완료", :class => "mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-cell mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" %>
+            </div>
+
+          <% end %>
+          <div class="mdl-cell mdl-cell--12-col">
+            <div class="mdl-grid">
+              <%= link_to "탈퇴하기", registration_path(resource_name), data: { confirm: "정말이십니까? ㅠㅠ" }, method: :delete, :class => "mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-cell mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %>
+            </div>
+          </div>
+          
+      </div>
+    </div>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>

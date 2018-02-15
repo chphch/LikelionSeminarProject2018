@@ -1,16 +1,31 @@
-<h2>Forgot your password?</h2>
+<div class="center-absolute center-valign">
+  <div class="mdl-grid form no-margin">
+  	<div class="mdl-color--red-100 mdl-shadow--2dp mdl-cell mdl-cell--12-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop mdl-cell--3-offset-desktop center-align">
+      <%= devise_error_messages! %>
+    </div>
+    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop mdl-cell--3-offset-desktop">
+      <div class="mdl-card__title center-align">
+        <h3 class="mdl-typography--font-bold">비밀번호 찾기</h3>
+        <p class="mb-0">가입하신 이메일로 비밀번호 재설정 링크를 보내드립니다</p>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, :class => "mdl-cell mdl-cell--12-col"}) do |f| %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-textfield mdl-js-textfield pt-0">
+                <%= f.label :email, :class => "mdl-textfield__label" %><br />
+                <%= f.email_field :email, autofocus: true, :class => "mdl-textfield__input" %>
+              </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+              <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet left-align">
+                <%= render "devise/shared/links" %>
+              </div>
+            </div>
+
+            <div class="mdl-grid">
+              <%= f.submit "인증하기", :class => "mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-cell--6-col-tablet mdl-cell--1-offset-tablet mdl-cell mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" %>
+            </div>
+          <% end %>
+          
+      </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
