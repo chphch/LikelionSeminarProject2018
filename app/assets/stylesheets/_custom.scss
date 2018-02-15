@@ -4,7 +4,14 @@
 
 @import 'layout/masonry';
 
-.mdl-layout__header-row {
+.mdl-layout__header-row.signed-out {
 	padding-left: 24px;
 }
 
+.mdl-layout__drawer {
+  overflow: hidden;
+  .mdl-navigation:last-child {
+    overflow-y: auto;
+    max-height: calc(100% - 222px);
+  }
+}

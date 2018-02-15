@@ -47,7 +47,7 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <!-- Header -->
       <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row">
+        <div class="mdl-layout__header-row signed-out">
           <span class="mdl-layout-title">Likenew</span>
           <div class="mdl-layout-spacer"></div>
           <nav class="mdl-navigation">
@@ -120,13 +120,13 @@
           </div>
         </nav>
       </div>
+    <% end %>
 
       <!-- Content -->
       <main class="mdl-layout__content">
         <div class="page-content"><%= yield %></div>
       </main>
     </div>
-    <% end %>
         
     <%= link_to 'Sign out', '/users/sign_out', method: :delete  %>
   </body>

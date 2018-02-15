@@ -8,6 +8,15 @@
 
 u1 = User.create(name: 'Kooja', email: 'a@a.com', password: '123456')
 u2 = User.create(name: 'Hyunwoo', email: 'b@b.com', password: '123456')
+u3 = User.create(name: 'jaeyoon', email: 'c@c.com', password: '123456')
+u4 = User.create(name: 'hyunmin', email: 'd@d.com', password: '123456')
+u5 = User.create(name: 'miniddong', email: 'e@e.com', password: '123456')
+u6 = User.create(name: 'aprilsblue', email: 'f@f.com', password: '123456')
+u7 = User.create(name: 'dongwook', email: 'g@g.com', password: '123456')
+u8 = User.create(name: 'jackthelee', email: 'h@h.com', password: '123456')
+u9 = User.create(name: 'hyeongkeol', email: 'i@i.com', password: '123456')
+u10 = User.create(name: 'bongkim', email: 'j@j.com', password: '123456')
+u11 = User.create(name: 'hyunyoung', email: 'k@k.com', password: '123456')
 
 f1 = Feed.create(title: '첫 번째 Feed 입니다', content: '친구들과 공유하고 싶은 이야기를 남겨봅시다', user_id: u1.id)
 f2 = Feed.create(title: '이번 겨울은 너무 추운 것 같아요', content: '겨울엔 태국이나 베트남에서 살고싶네요', user_id: u1.id)
