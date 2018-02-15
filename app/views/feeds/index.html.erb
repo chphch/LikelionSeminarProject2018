@@ -67,20 +67,41 @@
     도구모음
   -->
    <div class="mdl-card__menu">
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-      <i class="material-icons">share</i>
-    </button>
-    <!-- 좋아요 -->
-    <% if f.liking_users.include? current_user %>
-      <%=link_to '좋아요 취소', "/feeds/#{f.id}/like" %>
+    <!-- 내 글이면 -->
+    <% if f.user == current_user %>
+
+      <!-- 수정 -->
+      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500">
+        <i class="material-icons">edit</i>
+      </button>
+      <%=link_to "/feeds/#{f.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+        <i class="material-icons">delete</i>
+      <% end %>
+
+    <!-- 타인의 글이면 -->
     <% else %>
-      <%=link_to '좋아요', "/feeds/#{f.id}/like" %>
-    <% end %>
-    <!-- 삭제 -->
-    <%=link_to '삭제', "/feeds/#{f.id}", method: :delete %>
-    <!-- 팔로우 -->
-    <% unless current_user.followings.include? f.user %>
-      <%=link_to '글쓴이를 팔로우', "/follows/#{f.user.id}", method: :get %>
+
+      <!-- 팔로우 -->
+      <% if current_user.followings.include? f.user %>
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--accent">
+          <i class="material-icons">person_add</i>
+        </button>
+      <% else %>
+        <%=link_to "/follows/#{f.user.id}", method: :get, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+          <i class="material-icons">person_add</i>
+        <% end %>
+      <% end %>
+      <!-- 좋아요 -->
+      <% if f.liking_users.include? current_user %>
+        <%=link_to "/feeds/#{f.id}/like", :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--accent" do %>
+          <i class="material-icons">favorite</i>
+        <% end %>
+      <% else %>
+        <%=link_to "/feeds/#{f.id}/like", :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+          <i class="material-icons">favorite_border</i>
+        <% end %>
+      <% end %>
+
     <% end %>
   </div>
 </div>
