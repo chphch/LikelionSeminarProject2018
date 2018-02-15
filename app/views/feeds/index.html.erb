@@ -3,42 +3,59 @@
 -->
   <% @feeds.each do |f| %>
   <!-- 글 내용 및 정보 -->
-  <div><%= f.user.name%></div>
-  <div><%= f.created_at.strftime("%Y-%m-%d") %></div>
-  <div><%= f.title %></div>
-  <div><%= f.content %></div>
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__supporting-text">
+    <div><%= f.user.name%></div>
+    <div><%= f.created_at.strftime("%Y-%m-%d") %></div>
+    <div><%= f.title %></div>
+    <div><%= f.content %></div>
+  </div>  
 
   <!-- 
     댓글
   -->
-  <!-- 댓글 목록 -->
-  <% f.feed_comments.each do |c| %>
-    <%= c.content %>
-    <%= c.user.email%>
-    <%=link_to '삭제', "/feeds/#{f.id}/comments/#{c.id}", method: :delete %>
-  <% end %>
-  <!-- 댓글 작성 -->
-  <form action='/feeds/<%=f.id%>/comments' method='POST'>
-    <input type='text' name='content'/>
-    <button>등록</button>
-  </form>
+  <div class="mdl-card__actions mdl-card--border">
+    <!-- 더보기 버튼 -->
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      댓글 더보기
+    </a>
+    <!-- 댓글 목록 -->
+    <% f.feed_comments.each do |c| %>
+      <%= c.content %>
+      <%= c.user.email%>
+      <%=link_to '삭제', "/feeds/#{f.id}/comments/#{c.id}", method: :delete %>
+    <% end %>
+    <!-- 댓글 작성 -->
+    <form action='/feeds/<%=f.id%>/comments' method='POST'>
+      <input type='text' name='content'/>
+      <button>등록</button>
+    </form>
+  </div>
+
 
   <!--
     도구모음
   -->
-  <!-- 좋아요 -->
-  <% if f.liking_users.include? current_user %>
-    <%=link_to '좋아요 취소', "/feeds/#{f.id}/like" %>
-  <% else %>
-    <%=link_to '좋아요', "/feeds/#{f.id}/like" %>
-  <% end %>
-  <!-- 삭제 -->
-  <%=link_to '삭제', "/feeds/#{f.id}", method: :delete %>
-  <!-- 팔로우 -->
+   <div class="mdl-card__menu">
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+      <i class="material-icons">share</i>
+    </button>
+    <!-- 좋아요 -->
+    <% if f.liking_users.include? current_user %>
+      <%=link_to '좋아요 취소', "/feeds/#{f.id}/like" %>
+    <% else %>
+      <%=link_to '좋아요', "/feeds/#{f.id}/like" %>
+    <% end %>
+    <!-- 삭제 -->
+    <%=link_to '삭제', "/feeds/#{f.id}", method: :delete %>
+    <!-- 팔로우 -->
     <% unless current_user.followings.include? f.user %>
       <%=link_to '글쓴이를 팔로우', "/follows/#{f.user.id}", method: :get %>
     <% end %>
-    
+  </div>
+</div>
+  
+
 <% end %>
 
 <a href='/feeds/new'>Feed 새로 만들기</a>
