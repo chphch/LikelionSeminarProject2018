@@ -41,8 +41,8 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <% if user_signed_in? %>
+  <body class="mdl-color--grey-50">
+    <% if !user_signed_in? %>
     <!-- Layout : 비회원 -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <!-- Header -->
@@ -61,17 +61,11 @@
     <!-- Layout : 회원 -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <!-- Header -->
-      <header class="mdl-layout__header">
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
         <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title"><%= controller_name %></span>
           <div class="mdl-layout-spacer"></div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
-              <i class="material-icons">search</i>
-            </label>
-            <div class="mdl-textfield__expandable-holder">
-              <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
-            </div>
-          </div>
+          
         </div>
       </header>
       <!-- Drawer -->
