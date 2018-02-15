@@ -89,6 +89,7 @@
           <a class="mdl-navigation__link mdl-navigation__link--disabled pt-0 pb-0">유저 (<%= User.count %>명)</a>
           <div class="mdl-list">
             <% User.all.each do |u| %>
+            <% if u == current_user %>
               <div class="mdl-list__item">
                 <span class="mdl-list__item-primary-content">
                   <i class="material-icons mdl-list__item-avatar">person</i>
@@ -104,6 +105,24 @@
                   <% end %>
                 <% end %>
               </div>
+            <% else %>
+              <!-- 타인 -->
+              <div class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                  <i class="material-icons mdl-list__item-avatar">person</i>
+                  <span><%= u.name %></span>
+                </span>
+                <% if current_user.followings.include? u %>
+                  <a class="mdl-list__item-secondary-action">
+                    <i class="material-icons">person_add</i>
+                  </a>
+                <% else %>
+                  <%=link_to "/follows/#{u.id}", method: :get, :class => "mdl-list__item-secondary-action mdl-color-text--grey-500" do %>
+                    <i class="material-icons">person_add</i>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
             <% end %>
           </div>
         </nav>
