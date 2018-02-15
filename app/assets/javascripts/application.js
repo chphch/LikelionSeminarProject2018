@@ -13,3 +13,9 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+//= require material.min
+
+document.addEventListener("turbolinks:load", function() { 
+	// init MDL
+	componentHandler.upgradeDom();
+});
