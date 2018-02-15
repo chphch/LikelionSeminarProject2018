@@ -15,3 +15,7 @@
     max-height: calc(100% - 222px);
   }
 }
+
+input[type="text"] ~ .mdl-button {
+	right: -80px;
+}
