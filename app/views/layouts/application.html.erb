@@ -42,8 +42,10 @@
   </head>
 
   <body>
-
+    <% if user_signed_in? %>
+    <!-- Layout : 비회원 -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <!-- Header -->
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">Likenew</span>
@@ -54,20 +56,18 @@
           </nav>
         </div>
       </header>
+
+    <% else %>
+    <!-- Layout : 회원 -->
+
+
+      <!-- Content -->
       <main class="mdl-layout__content">
         <div class="page-content"><%= yield %></div>
       </main>
     </div>
-
-    <div class='header'>
-      <div class='container'>
-        <% if user_signed_in? %>
-          <%= link_to 'Sign out', '/users/sign_out', method: :delete  %>
-        <% else %>
-          <a href="/users/sign_in"> Sign in </a>
-          <a href="/users/sign_up"> Sign up </a>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
+        
+    <%= link_to 'Sign out', '/users/sign_out', method: :delete  %>
   </body>
 </html>
