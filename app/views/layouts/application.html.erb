@@ -66,14 +66,13 @@
           <span class="mdl-layout-title"><%= controller_name %></span>
           <div class="mdl-layout-spacer"></div>
           <!-- Menu -->
-          <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons">more_vert</i>
+          <button id="account-menu" class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="material-icons">account_circle</i>
           </button>
-          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
-            <li class="mdl-menu__item">Some Action</li>
-            <li class="mdl-menu__item">Another Action</li>
-            <li disabled class="mdl-menu__item">Disabled Action</li>
-            <li class="mdl-menu__item">Yet Another Action</li>
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="account-menu">
+            <li disabled class="mdl-menu__item"><%= current_user.name %>님</li>
+            <%= link_to '내 계정', '/users/edit', :class => 'mdl-menu__item' %>
+            <%= link_to '로그아웃', '/users/sign_out', method: :delete, :class => 'mdl-menu__item' %>
           </ul>
         </div>
       </header>
