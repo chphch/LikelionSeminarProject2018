@@ -16,6 +16,23 @@
 //= require material.min
 
 document.addEventListener("turbolinks:load", function() { 
+	// init Masonry
+	if (document.querySelector(".js-grid")) {
+		let msnry = new Masonry( '.js-grid', {
+		    itemSelector: '.mdl-card',
+		    columnWidth: '.js-grid-sizer',
+		    gutter: '.js-gutter-sizer',
+		    percentPosition: true,
+		    horizontalOrder: true,
+		    stagger: 30,
+		    // nicer reveal transition
+		    visibleStyle: { transform: 'translateY(0)', opacity: 1 },
+		    hiddenStyle: { transform: 'translateY(100px)', opacity: 0 },
+	  });
+	  setTimeout( function() {
+	    msnry.layout();
+	  }, 100 );
+	};
 	// init MDL
 	componentHandler.upgradeDom();
 });

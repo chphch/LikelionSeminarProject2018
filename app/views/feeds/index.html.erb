@@ -1,113 +1,117 @@
+<div class="js-grid">
+  <div class="js-grid-sizer"></div>
+  <div class="js-gutter-sizer"></div>
+
 <!--
   Post
 -->
   <% @feeds.each do |f| %>
   <!-- 글 내용 및 정보 -->
-  <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-  <div class="mdl-card__supporting-text">
-    <div class="mdl-list mt-0 pt-0">
-      <div class="mdl-list__item mdl-list__item--two-line no-padding">
-        <span class="mdl-list__item-primary-content">
-          <i class="material-icons mdl-list__item-avatar">person</i>
-          <strong><%= f.user.name %></strong>
-          <span class="mdl-list__item-sub-title"><%= f.created_at.strftime("%Y-%m-%d") %></span>
-        </span>
+  <div class="mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__supporting-text">
+      <div class="mdl-list mt-0 pt-0">
+        <div class="mdl-list__item mdl-list__item--two-line no-padding">
+          <span class="mdl-list__item-primary-content">
+            <i class="material-icons mdl-list__item-avatar">person</i>
+            <strong><%= f.user.name %></strong>
+            <span class="mdl-list__item-sub-title"><%= f.created_at.strftime("%Y-%m-%d") %></span>
+          </span>
+        </div>
+      </div>
+      <span class="mdl-typography--body-2"><%= f.title %></span>
+      <p><%= f.content %></p>
+    </div>  
+
+    <!-- 
+      댓글
+    -->
+    <div class="mdl-card__actions mdl-card--border">
+      <!-- 더보기 버튼 -->
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+        댓글 더보기
+      </a>
+      <!-- 댓글 목록 -->
+      <ul class="mdl-list no-margin no-padding">
+        <% f.feed_comments.each do |c| %>
+        <li class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            <p class="mdl-list__item-text-body mb-0">
+              <strong> <%= c.user.name %></strong> &nbsp;
+              <%= c.content %>
+            </p>
+          </span>
+          <% if c.user == current_user %>
+            <span class="mdl-list__item-secondary-content">
+              <%=link_to "/feeds/#{f.id}/comments/#{c.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+                <i class="material-icons">delete</i>
+              <% end %>
+            </span>
+          <% end %> 
+        </li>
+        <% end %>
+      </ul>
+       
+      <!-- 댓글 작성 -->
+      <div class="mdl-grid pb-0 pt-0">
+        <form class="mdl-cell mdl-cell--12-col mb-0 mt-0" action="/feeds/<%=f.id%>/comments" method="POST">
+          <div class="mdl-grid--no-spacing">
+            <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col-desktop mdl-cell--5-col-tablet mdl-cell--3-col-phone">
+              <input class="mdl-textfield__input" type="text" name="content" id="content"></textarea>
+              <label class="mdl-textfield__label" for="content">댓글 작성하기</label>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
+                등록
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    <span class="mdl-typography--body-2"><%= f.title %></span>
-    <p><%= f.content %></p>
-  </div>  
 
-  <!-- 
-    댓글
-  -->
-  <div class="mdl-card__actions mdl-card--border">
-    <!-- 더보기 버튼 -->
-    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-      댓글 더보기
-    </a>
-    <!-- 댓글 목록 -->
-    <ul class="mdl-list no-margin no-padding">
-      <% f.feed_comments.each do |c| %>
-      <li class="mdl-list__item">
-        <span class="mdl-list__item-primary-content">
-          <p class="mdl-list__item-text-body mb-0">
-            <strong> <%= c.user.name %></strong> &nbsp;
-            <%= c.content %>
-          </p>
-        </span>
-        <% if c.user == current_user %>
-          <span class="mdl-list__item-secondary-content">
-            <%=link_to "/feeds/#{f.id}/comments/#{c.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
-              <i class="material-icons">delete</i>
-            <% end %>
-          </span>
-        <% end %> 
-      </li>
+    <!--
+      도구모음
+    -->
+     <div class="mdl-card__menu">
+      <!-- 내 글이면 -->
+      <% if f.user == current_user %>
+
+        <!-- 수정 -->
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500">
+          <i class="material-icons">edit</i>
+        </button>
+        <%=link_to "/feeds/#{f.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+          <i class="material-icons">delete</i>
+        <% end %>
+
+      <!-- 타인의 글이면 -->
+      <% else %>
+
+        <!-- 팔로우 -->
+        <% if current_user.followings.include? f.user %>
+          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--accent">
+            <i class="material-icons">person_add</i>
+          </button>
+        <% else %>
+          <%=link_to "/follows/#{f.user.id}", method: :get, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+            <i class="material-icons">person_add</i>
+          <% end %>
+        <% end %>
+        <!-- 좋아요 -->
+        <% if f.liking_users.include? current_user %>
+          <%=link_to "/feeds/#{f.id}/like", :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--accent" do %>
+            <i class="material-icons">favorite</i>
+          <% end %>
+        <% else %>
+          <%=link_to "/feeds/#{f.id}/like", :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+            <i class="material-icons">favorite_border</i>
+          <% end %>
+        <% end %>
+
       <% end %>
-    </ul>
-     
-    <!-- 댓글 작성 -->
-    <div class="mdl-grid pb-0 pt-0">
-      <form class="mdl-cell mdl-cell--12-col mb-0 mt-0" action="/feeds/<%=f.id%>/comments" method="POST">
-        <div class="mdl-grid--no-spacing">
-          <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col-desktop mdl-cell--5-col-tablet mdl-cell--3-col-phone">
-            <input class="mdl-textfield__input" type="text" name="content" id="content"></textarea>
-            <label class="mdl-textfield__label" for="content">댓글 작성하기</label>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
-              등록
-            </button>
-          </div>
-        </div>
-      </form>
     </div>
   </div>
+  <% end %>
 
-  <!--
-    도구모음
-  -->
-   <div class="mdl-card__menu">
-    <!-- 내 글이면 -->
-    <% if f.user == current_user %>
-
-      <!-- 수정 -->
-      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500">
-        <i class="material-icons">edit</i>
-      </button>
-      <%=link_to "/feeds/#{f.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
-        <i class="material-icons">delete</i>
-      <% end %>
-
-    <!-- 타인의 글이면 -->
-    <% else %>
-
-      <!-- 팔로우 -->
-      <% if current_user.followings.include? f.user %>
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--accent">
-          <i class="material-icons">person_add</i>
-        </button>
-      <% else %>
-        <%=link_to "/follows/#{f.user.id}", method: :get, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
-          <i class="material-icons">person_add</i>
-        <% end %>
-      <% end %>
-      <!-- 좋아요 -->
-      <% if f.liking_users.include? current_user %>
-        <%=link_to "/feeds/#{f.id}/like", :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--accent" do %>
-          <i class="material-icons">favorite</i>
-        <% end %>
-      <% else %>
-        <%=link_to "/feeds/#{f.id}/like", :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
-          <i class="material-icons">favorite_border</i>
-        <% end %>
-      <% end %>
-
-    <% end %>
-  </div>
 </div>
-  
-
-<% end %>
 
 <!-- 
   Create 
