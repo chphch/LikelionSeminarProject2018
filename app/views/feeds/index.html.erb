@@ -1,46 +1,45 @@
-<h1>Feed Page</h1>
-<div>팔로잉: <%= current_user.followings.size =%>명</div>
-<div>팔로워: <%= current_user.followers.size =%>명</div>
-<a href='/feeds'>Feed Page</a>
-<a href='/events'>Event Page</a>
-<br>
-<br>
-<a href='/feeds/new'>Feed 새로 만들기</a>
+<!--
+  Post
+-->
+  <% @feeds.each do |f| %>
+  <!-- 글 내용 및 정보 -->
+  <div><%= f.user.name%></div>
+  <div><%= f.created_at.strftime("%Y-%m-%d") %></div>
+  <div><%= f.title %></div>
+  <div><%= f.content %></div>
 
-<% @feeds.each do |f| %>
-  <div style='border: 1px solid black;'>
-    <div>
-      <% if f.liking_users.include? current_user %>
-        <%=link_to '좋아요 취소', "/feeds/#{f.id}/like" %>
-      <% else %>
-        <%=link_to '좋아요', "/feeds/#{f.id}/like" %>
-      <% end %>
-      <%=link_to '삭제', "/feeds/#{f.id}", method: :delete %>
-    </div>
-    <div><%= f.title %></div>
-    <div><%= f.content %></div>
-    <div><%= f.user.email%></div>
-    <div><%= f.user.name%></div>
+  <!-- 
+    댓글
+  -->
+  <!-- 댓글 목록 -->
+  <% f.feed_comments.each do |c| %>
+    <%= c.content %>
+    <%= c.user.email%>
+    <%=link_to '삭제', "/feeds/#{f.id}/comments/#{c.id}", method: :delete %>
+  <% end %>
+  <!-- 댓글 작성 -->
+  <form action='/feeds/<%=f.id%>/comments' method='POST'>
+    <input type='text' name='content'/>
+    <button>등록</button>
+  </form>
+
+  <!--
+    도구모음
+  -->
+  <!-- 좋아요 -->
+  <% if f.liking_users.include? current_user %>
+    <%=link_to '좋아요 취소', "/feeds/#{f.id}/like" %>
+  <% else %>
+    <%=link_to '좋아요', "/feeds/#{f.id}/like" %>
+  <% end %>
+  <!-- 삭제 -->
+  <%=link_to '삭제', "/feeds/#{f.id}", method: :delete %>
+  <!-- 팔로우 -->
     <% unless current_user.followings.include? f.user %>
       <%=link_to '글쓴이를 팔로우', "/follows/#{f.user.id}", method: :get %>
     <% end %>
-    <div style='border: 1px solid gray'>
-      <div>
-        <strong>댓글</strong>
-        <% f.feed_comments.each do |c| %>
-          <div>
-            <%= c.content %>
-            <%= c.user.email%>
-            <%=link_to '삭제', "/feeds/#{f.id}/comments/#{c.id}", method: :delete %>
-          </div>
-        <% end %>
-      </div>
-      <div>
-        <form action='/feeds/<%=f.id%>/comments' method='POST'>
-          <input type='text' name='content'/>
-          <button>댓글 작성</button>
-        </form>
-      </div>
-    </div>
-  </div>
+    
 <% end %>
+
+<a href='/feeds/new'>Feed 새로 만들기</a>
+
