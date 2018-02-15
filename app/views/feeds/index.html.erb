@@ -5,10 +5,17 @@
   <!-- 글 내용 및 정보 -->
   <div class="demo-card-wide mdl-card mdl-shadow--2dp">
   <div class="mdl-card__supporting-text">
-    <div><%= f.user.name%></div>
-    <div><%= f.created_at.strftime("%Y-%m-%d") %></div>
-    <div><%= f.title %></div>
-    <div><%= f.content %></div>
+    <div class="mdl-list mt-0 pt-0">
+      <div class="mdl-list__item mdl-list__item--two-line no-padding">
+        <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-avatar">person</i>
+          <strong><%= f.user.name %></strong>
+          <span class="mdl-list__item-sub-title"><%= f.created_at.strftime("%Y-%m-%d") %></span>
+        </span>
+      </div>
+    </div>
+    <span class="mdl-typography--body-2"><%= f.title %></span>
+    <p><%= f.content %></p>
   </div>  
 
   <!-- 
