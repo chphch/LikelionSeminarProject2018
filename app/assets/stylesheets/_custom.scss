@@ -27,3 +27,12 @@ input[type="text"] ~ .mdl-button {
   z-index: 999;
   @include shadow-3dp();
 }
+
+.mdl-grid.form {
+  .mdl-card {
+    padding: 50px 0;
+    .mdl-card__title {
+      flex-direction: column;
+    }
+  }
+}
