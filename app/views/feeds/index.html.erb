@@ -130,6 +130,8 @@
 
       $("a.btn-more-comment").on("click", function(event){
 
+          var msnry = Masonry.data(".js-grid")
+
           $(this).toggleClass("hiding-comment");
 
           if($(this).hasClass("hiding-comment"))
@@ -142,6 +144,9 @@
               $(this).text("댓글 더보기");
               $(this).closest("div").find("ul").find(".comment").not(".newest-comment").hide();
           }
+
+          msnry.reloadItems();
+          msnry.layout();
 
       });
 
