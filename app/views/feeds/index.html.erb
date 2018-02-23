@@ -27,13 +27,17 @@
     -->
     <div class="mdl-card__actions mdl-card--border">
       <!-- 더보기 버튼 -->
-      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      <a id="btn-more-comments-<%=f.id%>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect btn-more-comment">
         댓글 더보기
       </a>
       <!-- 댓글 목록 -->
-      <ul class="mdl-list no-margin no-padding">
-        <% f.feed_comments.each do |c| %>
-        <li class="mdl-list__item comment">
+      <ul id="comments-list-<%=f.id%>"class="mdl-list no-margin no-padding">
+        <% f.feed_comments.each_with_index do |c, i| %>
+        <% if i == 0 %>
+        <li class="mdl-list__item comment newest-comment">
+        <% else %>
+        <li class="mdl-list__item comment" style="display:none;">
+        <% end %>
           <span class="mdl-list__item-primary-content">
             <p class="mdl-list__item-text-body mb-0">
               <strong> <%= c.user.name %></strong> &nbsp;
@@ -53,7 +57,7 @@
        
       <!-- 댓글 작성 -->
       <div class="mdl-grid pb-0 pt-0">
-        <form class="mdl-cell mdl-cell--12-col mb-0 mt-0" action="/feeds/<%=f.id%>/comments" method="POST">
+	      <form  class="mdl-cell mdl-cell--12-col mb-0 mt-0" action="/feeds/<%=f.id%>/comments" method="POST">
           <div class="mdl-grid--no-spacing">
             <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col-desktop mdl-cell--5-col-tablet mdl-cell--3-col-phone">
               <input class="mdl-textfield__input" type="text" name="content" id="content"></textarea>
@@ -120,3 +124,32 @@
   <i class="material-icons">create</i>
 </a>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+
+	  $("#btn-more-comments-1").on("click", function(event){
+		  console.log("test")
+
+          var msnry = Masonry.data(".js-grid")
+
+          $("#btn-more-comments-1").toggleClass("hiding-comment");
+
+          if($("#btn-more-comments-1").hasClass("hiding-comment"))
+          {
+              $("#btn-more-comments-1").text("댓글 숨기기");
+              $('#comments-list-1').find(".comment").not(".newest-comment").show();
+          }
+          else
+          {
+              $("#btn-more-comments-1").text("댓글 더보기");
+              $('#comments-list-1').find(".comment").not(".newest-comment").hide();
+          }
+
+          msnry.reloadItems();
+          msnry.layout();
+
+      });
+
+
+  });
+</script>
