@@ -27,11 +27,11 @@
     -->
     <div class="mdl-card__actions mdl-card--border">
       <!-- 더보기 버튼 -->
-      <a id="btn-more-comments-<%=f.id%>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect btn-more-comment">
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect btn-more-comment">
         댓글 더보기
       </a>
       <!-- 댓글 목록 -->
-      <ul id="comments-list-<%=f.id%>"class="mdl-list no-margin no-padding">
+      <ul class="mdl-list no-margin no-padding">
         <% f.feed_comments.each_with_index do |c, i| %>
         <% if i == 0 %>
         <li class="mdl-list__item comment newest-comment">
@@ -74,7 +74,7 @@
     <!--
       도구모음
     -->
-     <div class="mdl-card__menu">
+      <div class="mdl-card__menu">
       <!-- 내 글이면 -->
       <% if f.user == current_user %>
 
@@ -127,27 +127,20 @@
 <script type="text/javascript">
   $(document).ready(function(){
 
-	  $("#btn-more-comments-1").on("click", function(event){
-		  console.log("test")
+      $("a.btn-more-comment").on("click", function(event){
 
-          var msnry = Masonry.data(".js-grid")
+          $(this).toggleClass("hiding-comment");
 
-          $("#btn-more-comments-1").toggleClass("hiding-comment");
-
-          if($("#btn-more-comments-1").hasClass("hiding-comment"))
+          if($(this).hasClass("hiding-comment"))
           {
-              $("#btn-more-comments-1").text("댓글 숨기기");
-              $('#comments-list-1').find(".comment").not(".newest-comment").show();
+              $(this).text("댓글 숨기기");
+              $(this).closest("div").find("ul").find(".comment").not(".newest-comment").show();
           }
           else
           {
-              $("#btn-more-comments-1").text("댓글 더보기");
-              $('#comments-list-1').find(".comment").not(".newest-comment").hide();
+              $(this).text("댓글 더보기");
+              $(this).closest("div").find("ul").find(".comment").not(".newest-comment").hide();
           }
-
-          msnry.reloadItems();
-          msnry.layout();
-
       });
 
 
