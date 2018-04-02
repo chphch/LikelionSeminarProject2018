@@ -9,6 +9,7 @@
   <div style='border: 1px solid black;'>
     <div>
       <%=link_to '삭제', "/feeds/#{f.id}", method: :delete %>
+      <%=link_to '수정', "/feeds/#{f.id}/edit" %>
     </div>
     <div><%= f.title %></div>
     <div><%= f.content %></div>
