@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/feeds/new', to: 'feeds#new'
   post '/feeds', to: 'feeds#create'
   delete '/feeds/:id', to: 'feeds#destroy'
+  get '/feeds/:id/edit', to: 'feeds#edit'
 
   get '/events', to: 'events#index'
   get '/events/new', to: 'events#new'
