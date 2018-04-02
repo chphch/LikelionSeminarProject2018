@@ -33,4 +33,17 @@ class FeedsController < ApplicationController
 
     render 'edit'
   end
+
+  def update
+    feed_id = params[:id]
+    title = params[:title]
+    content = params[:content]
+
+    feed = Feed.find(feed_id)
+    feed.title = title
+    feed.content = content
+    feed.save
+
+    redirect_to action: 'index'
+  end
 end
