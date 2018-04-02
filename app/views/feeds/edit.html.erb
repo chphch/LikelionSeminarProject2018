@@ -1,1 +1,7 @@
 <h1>Edit Feed</h1>
+<form action='/feeds/<%= @feed.id %>' method='POST'>
+  <input type="hidden" name="_method" value="put" />
+  title: <input type='text' name='title' value='<%= @feed.title %>' />
+  content: <input type='text' name='content' value='<%= @feed.content %>' />
+  <button>저장하기</button>
+</form>
