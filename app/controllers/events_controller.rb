@@ -26,4 +26,23 @@ class EventsController < ApplicationController
 
     redirect_to action: 'index'
   end
+
+  def create_comment
+    event_id = params[:id]
+    content = params[:content]
+
+    event = Event.find(event_id)
+    new_comment = event.event_comments.new
+    new_comment.content = content
+    new_comment.save
+
+    redirect_to action: 'index'
+  end
+
+  def destroy_comment
+    comment_id = params[:comment_id]
+    EventComment.destroy(comment_id)
+
+    redirect_to action: 'index'
+  end
 end
