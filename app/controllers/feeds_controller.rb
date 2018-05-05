@@ -1,4 +1,5 @@
 class FeedsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @feeds = Feed.all
     render 'index'
@@ -15,6 +16,7 @@ class FeedsController < ApplicationController
     feed = Feed.new
     feed.title = title
     feed.content = content
+    feed.user_id = current_user.id
     feed.save
 
     redirect_to action: 'index'
@@ -34,6 +36,7 @@ class FeedsController < ApplicationController
     feed = Feed.find(feed_id)
     new_comment = feed.feed_comments.new
     new_comment.content = content
+    new_comment.user_id = current_user.id 
     new_comment.save
 =begin
 동일한 일을 하는 코드

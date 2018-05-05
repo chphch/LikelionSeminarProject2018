@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @events = Event.all
     render 'index'
@@ -15,6 +16,7 @@ class EventsController < ApplicationController
     event = Event.new
     event.date = date
     event.title = title
+    event.user_id = current_user.id
     event.save
 
     redirect_to action: 'index'
@@ -34,6 +36,7 @@ class EventsController < ApplicationController
     event = Event.find(event_id)
     new_comment = event.event_comments.new
     new_comment.content = content
+    new_comment.user_id = current_user.id
     new_comment.save
 
     redirect_to action: 'index'
