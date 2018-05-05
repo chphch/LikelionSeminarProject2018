@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete '/feeds/:id', to: 'feeds#destroy'
   post '/feeds/:id/comments', to: 'feeds#create_comment'
   delete '/feeds/:id/comments/:comment_id', to: 'feeds#destroy_comment'
+  post '/feed_comments/:id', to: 'feeds#create_recomment'
 
   get '/events', to: 'events#index'
   get '/events/new', to: 'events#new'

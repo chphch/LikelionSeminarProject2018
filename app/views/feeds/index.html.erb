@@ -22,6 +22,18 @@
             <%= c.user.email%>
             <%=link_to '삭제', "/feeds/#{f.id}/comments/#{c.id}", method: :delete %>
           </div>
+          <form action='/feed_comments/<%=c.id%>' method='POST'>
+            <input type='text' name='content'>
+            <button>대댓글 작성</button>
+          </form>
+          <div style="margin-left: 20px;">
+            대댓글
+            <% c.feed_recomments.each do |rc| %>
+              <div>
+                <%= rc.content %>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       </div>
       <div>
