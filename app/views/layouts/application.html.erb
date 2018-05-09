@@ -15,6 +15,8 @@
   </head>
 
   <body>
+    <!-- For signed in user -->
+    <% if user_signed_in? %>
     <!-- Always shows a header, even in smaller screens. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
@@ -44,6 +46,8 @@
       </main>
     </div>
 
+    <!-- For signing in user -->
+  <% else %>
     <!-- Always shows a header, even in smaller screens. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
@@ -63,6 +67,7 @@
         <div class="page-content"><!-- Your content goes here --></div>
       </main>
     </div>
+  <% end %>
 
     <%= yield %>
   </body>
