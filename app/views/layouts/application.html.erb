@@ -39,10 +39,6 @@
           <a class="mdl-navigation__link" href="/events">이벤트</a>
         </nav>
       </div>
-      <main class="mdl-layout__content">
-        <div class="page-content"><%= yield %></div>
-      </main>
-    </div>
 
     <!-- For signing in user -->
   <% else %>
@@ -61,11 +57,12 @@
           </nav>
         </div>
       </header>
+  <% end %>
+
       <main class="mdl-layout__content">
         <div class="page-content"><%= yield %></div>
       </main>
     </div>
-  <% end %>
 
   </body>
 </html>
