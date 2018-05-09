@@ -54,37 +54,16 @@
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="/users/sign_in">로그인</a>
+            <a class="mdl-navigation__link" href="/users/sign_up">회원가입</a>
           </nav>
         </div>
       </header>
-      <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Title</span>
-        <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-        </nav>
-      </div>
       <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here --></div>
       </main>
     </div>
 
-    <div class='header'>
-      <div class='container'>
-        <% if user_signed_in? %>
-          <%= link_to 'Sign out', '/users/sign_out', method: :delete  %>
-        <% else %>
-          <a href="/users/sign_in"> Sign in </a>
-          <a href="/users/sign_up"> Sign up </a>
-        <% end %>
-      </div>
-    </div>
     <%= yield %>
   </body>
 </html>
