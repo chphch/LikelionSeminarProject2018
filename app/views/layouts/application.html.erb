@@ -42,7 +42,7 @@
         </nav>
       </div>
       <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here --></div>
+        <div class="page-content"><%= yield %></div>
       </main>
     </div>
 
@@ -64,11 +64,10 @@
         </div>
       </header>
       <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here --></div>
+        <div class="page-content"><%= yield %></div>
       </main>
     </div>
   <% end %>
 
-    <%= yield %>
   </body>
 </html>
