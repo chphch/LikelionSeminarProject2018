@@ -46,6 +46,8 @@
         </nav>
         <div class="demo-list-action mdl-list">
           <% User.all.each do |u| %>
+            <% if u == current_user %>
+            <% else %>
           <div class="mdl-list__item">
             <span class="mdl-list__item-primary-content">
               <i class="material-icons mdl-list__item-avatar">person</i>
@@ -57,6 +59,7 @@
             <a class="mdl-list__item-secondary-action mdl-color-text--grey-500" href="/follows/<%= u.id %>"><i class="material-icons">person_add</i></a>
           <% end %>
           </div>
+        <% end %>
         <% end %>
         </div>
       </div>
