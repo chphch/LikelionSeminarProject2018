@@ -15,6 +15,7 @@
   </head>
 
   <body class="mdl-color--grey-50">
+    <div class="mdl-layout__container">
     <!-- For signed in user -->
     <% if user_signed_in? %>
     <!-- Always shows a header, even in smaller screens. -->
@@ -50,12 +51,8 @@
               <li class="mdl-list__item mdl-list__item--two-line">
                 <span class="mdl-list__item-primary-content">
                   <i class="material-icons mdl-list__item-avatar">person</i>
-                  <span>Bryan Cranston</span>
-                  <span class="mdl-list__item-sub-title">62 Episodes</span>
-                </span>
-                <span class="mdl-list__item-secondary-content">
-                  <span class="mdl-list__item-secondary-info">Actor</span>
-                  <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">star</i></a>
+                  <strong><span><%= current_user.name %></span></strong>
+                  <span class="mdl-list__item-sub-title">팔로잉 <%= current_user.followings.size %> 팔로워 <%= current_user.followers.size %></span>
                 </span>
               </li>
             <% else %>
@@ -99,5 +96,6 @@
       </main>
     </div>
 
+  </div>
   </body>
 </html>
