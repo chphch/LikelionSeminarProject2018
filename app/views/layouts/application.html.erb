@@ -51,7 +51,11 @@
               <i class="material-icons mdl-list__item-avatar">person</i>
               <span><%= u.name %></span>
             </span>
+            <% if current_user.followings.include? u %>
             <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">person_add</i></a>
+          <% else %>
+            <a class="mdl-list__item-secondary-action mdl-color-text--grey-500" href="/follows/<%= u.id %>"><i class="material-icons">person_add</i></a>
+          <% end %>
           </div>
         <% end %>
         </div>
