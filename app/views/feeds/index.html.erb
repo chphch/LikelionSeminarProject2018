@@ -1,12 +1,3 @@
-<h1>Feed Page</h1>
-<div>팔로잉: <%= current_user.followings.size =%>명</div>
-<div>팔로워: <%= current_user.followers.size =%>명</div>
-<a href='/feeds'>Feed Page</a>
-<a href='/events'>Event Page</a>
-<br>
-<br>
-<a href='/feeds/new'>Feed 새로 만들기</a>
-
 <% @feeds.each do |f| %>
   <div style='border: 1px solid black;'>
     <div>
