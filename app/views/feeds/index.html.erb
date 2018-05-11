@@ -33,40 +33,4 @@
       </button>
     </div>
   </div>
-
-  <div style='border: 1px solid black;'>
-    <div>
-      <% if f.liking_users.include? current_user %>
-        <%=link_to '좋아요 취소', "/feeds/#{f.id}/like" %>
-      <% else %>
-        <%=link_to '좋아요', "/feeds/#{f.id}/like" %>
-      <% end %>
-      <%=link_to '삭제', "/feeds/#{f.id}", method: :delete %>
-    </div>
-    <div><%= f.title %></div>
-    <div><%= f.content %></div>
-    <div><%= f.user.email%></div>
-    <div><%= f.user.name%></div>
-    <% unless current_user.followings.include? f.user %>
-      <%=link_to '글쓴이를 팔로우', "/follows/#{f.user.id}", method: :get %>
-    <% end %>
-    <div style='border: 1px solid gray'>
-      <div>
-        <strong>댓글</strong>
-        <% f.feed_comments.each do |c| %>
-          <div>
-            <%= c.content %>
-            <%= c.user.email%>
-            <%=link_to '삭제', "/feeds/#{f.id}/comments/#{c.id}", method: :delete %>
-          </div>
-        <% end %>
-      </div>
-      <div>
-        <form action='/feeds/<%=f.id%>/comments' method='POST'>
-          <input type='text' name='content'/>
-          <button>댓글 작성</button>
-        </form>
-      </div>
-    </div>
-  </div>
 <% end %>
