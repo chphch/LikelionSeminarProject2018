@@ -66,7 +66,15 @@ class FeedsController < ApplicationController
     else
       like.destroy_all
     end
-
+  end
+  
+  def create_recomment
+    feed_recomment = FeedRecomment.new
+    feed_recomment.feed_comment_id = params[:id]
+    feed_recomment.content = params[:content]
+    feed_recomment.save
+    
     redirect_to action: 'index'
   end
+  
 end
