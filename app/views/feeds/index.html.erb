@@ -48,9 +48,33 @@
       </form>
     </div>
     <div class="mdl-card__menu">
-      <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-        <i class="material-icons">share</i>
-      </button>
+      <% if f.user == current_user %>
+        <a href="#" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">edit</i>
+        </a>
+        <a href="/feeds/<%= f.id %>" data-method="DELETE" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">delete</i>
+        </a>
+      <% else %>
+        <% if current_user.followings.include? f.user %>
+          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+            <i class="material-icons">person_add</i>
+          </a>
+        <% else %>
+          <a href="/follows/<%= f.user.id %>" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color--grey-500">
+            <i class="material-icons">person_add</i>
+          </a>
+        <% end %>
+        <% if f.liking_users.include? current_user %>
+          <a href="/feeds/<%= f.id %>/like" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+            <i class="material-icons">favorite</i>
+          </a>
+        <% else %>
+          <a href="/feeds/<%= f.id %>/like" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color--grey-500">
+            <i class="material-icons">favorite</i>
+          </a>
+        <% end %>
+      <% end %>
     </div>
   </div>
 <% end %>
