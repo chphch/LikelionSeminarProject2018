@@ -1,7 +1,12 @@
 class FeedsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @feeds = Feed.all
+    # 단순하게 Feed.all로 부르면 1:N으로 연계된 모델들을 뷰에서 부를 때
+    # 새로 각각의 쿼리를 만드는 N+1 query problem 이 있음
+    # 이를 해결하기 위해서는 아래와 같이 includes를 이용해서 eager loading
+    # @feeds = Feed.all
+    @feeds = Feed.includes(:feed_likes, :liking_users, user: [:followers],
+                           feed_comments: [:user]).all
     render 'index'
   end
 
