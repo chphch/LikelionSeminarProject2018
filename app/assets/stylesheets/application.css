@@ -25,3 +25,9 @@
 .no-margin {
   margin: 0;
 }
+.mdl-grid--no-spacing > form {
+  margin-left: 15px;
+}
+.mdl-textfield + button {
+  margin-left: 10px;
+}
