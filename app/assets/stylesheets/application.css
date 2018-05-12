@@ -36,3 +36,8 @@
   vertical-align: top;
   margin: 10px;
 }
+.create-post {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
