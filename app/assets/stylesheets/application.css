@@ -31,3 +31,8 @@
 .mdl-textfield + button {
   margin-left: 10px;
 }
+.my-card {
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px;
+}
