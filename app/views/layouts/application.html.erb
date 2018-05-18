@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <%= csrf_meta_tags %>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- SEO -->
-    <title>Likenew</title>
-    <meta name="description" content="설명을 적으세요 (160자 이내)">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://example.com/page.html">
-    <meta property="og:title" content="Content Title">
-    <meta property="og:image" content="https://example.com/image.jpg">
-    <meta property="og:description" content="Description Here">
-    <meta property="og:site_name" content="Site Name">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@site_account">
-    <meta name="twitter:creator" content="@individual_account">
-    <meta name="twitter:url" content="https://example.com/page.html">
-    <meta name="twitter:title" content="Content Title">
-    <meta name="twitter:description" content="Content description less than 200 characters">
-    <meta name="twitter:image" content="https://example.com/image.jpg">
-    <!-- Favicons -->
+<head>
+  <%= csrf_meta_tags %>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- SEO -->
+  <title>Likenew</title>
+  <meta name="description" content="설명을 적으세요 (160자 이내)">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/page.html">
+  <meta property="og:title" content="Content Title">
+  <meta property="og:image" content="https://example.com/image.jpg">
+  <meta property="og:description" content="Description Here">
+  <meta property="og:site_name" content="Site Name">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@site_account">
+  <meta name="twitter:creator" content="@individual_account">
+  <meta name="twitter:url" content="https://example.com/page.html">
+  <meta name="twitter:title" content="Content Title">
+  <meta name="twitter:description" content="Content description less than 200 characters">
+  <meta name="twitter:image" content="https://example.com/image.jpg">
+  <!-- Favicons -->
   <!--
     <link rel="icon" type="image/png" href="https://example.com/favicon.png">
     <link rel="apple-touch-icon" href="/custom-icon.png">
@@ -32,76 +32,78 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="msapplication-config" content="browserconfig.xml" />
   -->
-    <!-- Avoid Duplicate Content -->
-    <link rel="canonical" href="http://example.com/2017/09/a-new-article-to-read.html">
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- Stylesheets & Javascripts -->
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <!-- Avoid Duplicate Content -->
+  <link rel="canonical" href="http://example.com/2017/09/a-new-article-to-read.html">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Stylesheets & Javascripts -->
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <!-- Include Jquery CDN -->
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  </head>
+  <!-- Include Jquery CDN -->
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
 
-  <body class="mdl-color--grey-50">
-    <% if !user_signed_in? %>
-    <!-- Layout : 비회원 -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-      <!-- Header -->
-      <header class="mdl-layout__header">
-        <div class="mdl-layout__header-row signed-out">
-          <span class="mdl-layout-title">Likenew</span>
-          <div class="mdl-layout-spacer"></div>
-          <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="/users/sign_in">로그인</a>
-            <a class="mdl-navigation__link" href="/users/sign_up">회원가입</a>
-          </nav>
-        </div>
-      </header>
-
-    <% else %>
-    <!-- Layout : 회원 -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-      <!-- Header -->
-      <header class="mdl-layout__header mdl-layout__header--waterfall">
-        <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title"><%= controller_name %></span>
-          <div class="mdl-layout-spacer"></div>
-          <!-- Menu -->
-          <button id="account-menu" class="mdl-button mdl-js-button mdl-button--icon">
-            <i class="material-icons">account_circle</i>
-          </button>
-          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="account-menu">
-            <li disabled class="mdl-menu__item"><%= current_user.name %>님</li>
-            <%= link_to '내 계정', '/users/edit', :class => 'mdl-menu__item' %>
-            <%= link_to '로그아웃', '/users/sign_out', method: :delete, :class => 'mdl-menu__item' %>
-          </ul>
-        </div>
-      </header>
-      <!-- Drawer -->
-      <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Title</span>
+<body class="mdl-color--grey-50">
+<% if !user_signed_in? %>
+  <!-- Layout : 비회원 -->
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <!-- Header -->
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row signed-out">
+        <span class="mdl-layout-title">Likenew</span>
+        <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
-           <%= link_to "피드", feeds_path, :class => ["mdl-navigation__link", current_class?(feeds_path)].join(" ") %>
-          <%= link_to "이벤트", events_path, :class => ["mdl-navigation__link", current_class?(events_path)].join(" ") %>
-          <hr>
+          <a class="mdl-navigation__link" href="/users/sign_in">로그인</a>
+          <a class="mdl-navigation__link" href="/users/sign_up">회원가입</a>
         </nav>
-        <!-- User List -->
-        <nav class="mdl-navigation">
-          <a class="mdl-navigation__link mdl-navigation__link--disabled pt-0 pb-0">유저 (<%= User.count %>명)</a>
-          <div class="mdl-list">
-            <% User.all.each do |u| %>
+      </div>
+    </header>
+  </div>
+
+<% else %>
+  <!-- Layout : 회원 -->
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <!-- Header -->
+    <header class="mdl-layout__header mdl-layout__header--waterfall">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title"><%= controller_name %></span>
+        <div class="mdl-layout-spacer"></div>
+        <!-- Menu -->
+        <button id="account-menu" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons">account_circle</i>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="account-menu">
+          <li disabled class="mdl-menu__item"><%= current_user.name %>님</li>
+          <%= link_to '내 계정', '/users/edit', :class => 'mdl-menu__item' %>
+          <%= link_to '로그아웃', '/users/sign_out', method: :delete, :class => 'mdl-menu__item' %>
+        </ul>
+      </div>
+    </header>
+    <!-- Drawer -->
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Title</span>
+      <nav class="mdl-navigation">
+        <%= link_to "피드", feeds_path, :class => ["mdl-navigation__link", current_class?(feeds_path)].join(" ") %>
+        <%= link_to "이벤트", events_path, :class => ["mdl-navigation__link", current_class?(events_path)].join(" ") %>
+        <hr>
+      </nav>
+      <!-- User List -->
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link mdl-navigation__link--disabled pt-0 pb-0">유저 (<%= User.count %>명)</a>
+        <div class="mdl-list">
+          <% User.all.each do |u| %>
             <% if u == current_user %>
               <!-- 본인 -->
               <div class="mdl-list__item mdl-list__item--two-line">
                 <span class="mdl-list__item-primary-content">
                   <i class="material-icons mdl-list__item-avatar">person</i>
                   <strong><%= u.name %></strong>
-                  <span class="mdl-list__item-sub-title">팔로잉 <%= current_user.followings.size %> 팔로워 <%= current_user.followers.size %></span>
+                  <span class="mdl-list__item-sub-title">팔로잉 <%= current_user.followings.size %>
+                    팔로워 <%= current_user.followers.size %></span>
                 </span>
               </div>
             <% else %>
@@ -116,24 +118,24 @@
                     <i class="material-icons">person_add</i>
                   </a>
                 <% else %>
-                  <%=link_to "/follows/#{u.id}", method: :get, :class => "mdl-list__item-secondary-action mdl-color-text--grey-500" do %>
+                  <%= link_to "/follows/#{u.id}", method: :get, :class => "mdl-list__item-secondary-action mdl-color-text--grey-500" do %>
                     <i class="material-icons">person_add</i>
                   <% end %>
                 <% end %>
               </div>
             <% end %>
-            <% end %>
-          </div>
-        </nav>
-      </div>
-    <% end %>
-
-      <!-- Content -->
-      <main class="mdl-layout__content">
-        <div class="page-content"><%= yield %></div>
-      </main>
+          <% end %>
+        </div>
+      </nav>
     </div>
-        
-    <%= link_to 'Sign out', '/users/sign_out', method: :delete  %>
-  </body>
+<% end %>
+
+<!-- Content -->
+<main class="mdl-layout__content">
+  <div class="page-content"><%= yield %></div>
+</main>
+</div>
+
+<%= link_to 'Sign out', '/users/sign_out', method: :delete %>
+</body>
 </html>
