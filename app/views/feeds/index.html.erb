@@ -27,7 +27,7 @@
     -->
     <div class="mdl-card__actions mdl-card--border">
       <!-- 더보기 버튼 -->
-      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect btn-more-comment">
+      <a id="btn-more-comment-<%=f.id%>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect btn-more-comment">
         댓글 더보기
       </a>
       <!-- 댓글 목록 -->
@@ -36,7 +36,7 @@
         <% if i == 0 %>
         <li class="mdl-list__item comment newest-comment">
         <% else %>
-        <li class="mdl-list__item comment" style="display:none;">
+        <li class="mdl-list__item comment old-comment-<%=f.id%>" style="display:none;">
         <% end %>
           <span class="mdl-list__item-primary-content">
             <p class="mdl-list__item-text-body mb-0">
@@ -125,28 +125,22 @@
 </a>
 
 <script type="text/javascript">
-  $(document).ready(function(){
 
-      $("a.btn-more-comment").on("click", function(event){
-
-          var msnry = Masonry.data(".js-grid")
-
-          $(this).toggleClass("hiding-comment");
-
-          if($(this).hasClass("hiding-comment"))
-          {
-              $(this).text("댓글 숨기기");
-              $(this).closest("div").find("ul").find(".comment").not(".newest-comment").show();
-          }
-          else
-          {
-              $(this).text("댓글 더보기");
-              $(this).closest("div").find("ul").find(".comment").not(".newest-comment").hide();
-          }
-
-          msnry.reloadItems();
-          msnry.layout();
-      });
-
-  });
+    // button select
+    var btn = document.getElementById('btn-more-comment-1').addEventListener('click', function(){
+      var text = this.textContent;
+      if (text === "댓글 더보기") {
+        this.textContent = text.replace(text, "댓글 숨기기");
+        document.querySelectorAll('.old-comment-1').forEach(
+          function(comment) {
+            comment.style.display = 'block';
+          })
+      } else {
+        this.textContent = text.replace(text, "댓글 더보기"); 
+        document.querySelectorAll('.old-comment-1').forEach(
+          function(comment) {
+            comment.style.display = 'none';
+          })
+      }
+    })
 </script>
