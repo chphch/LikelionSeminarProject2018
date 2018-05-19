@@ -27,13 +27,17 @@
     -->
     <div class="mdl-card__actions mdl-card--border">
       <!-- 더보기 버튼 -->
-      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect btn-more-comment">
         댓글 더보기
       </a>
       <!-- 댓글 목록 -->
       <ul class="mdl-list no-margin no-padding">
-        <% f.feed_comments.each do |c| %>
-        <li class="mdl-list__item comment">
+        <% f.feed_comments.each_with_index do |c, i| %>
+        <% if i == 0 %>
+         <li class="mdl-list__item comment newest-comment">
+        <% else %>
+          <li class="mdl-list__item comment" style="display:none;">
+        <% end %>
           <span class="mdl-list__item-primary-content">
             <p class="mdl-list__item-text-body mb-0">
               <strong> <%= c.user.name %></strong> &nbsp;
@@ -119,4 +123,31 @@
 <a href="/feeds/new" id="js-new-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
   <i class="material-icons">create</i>
 </a>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $("a.btn-more-comment").on("click", function(event){
+
+      var msnry = Masonry.data(".js-grid")
+
+      $(this).toggleClass("hiding-comment");
+
+      if($(this).hasClass("hiding-comment"))
+      {
+        $(this).text("댓글 숨기기");
+        $(this).closest("div").find("ul").find(".comment").not(".newest-comment").show();
+      }
+      else
+      {
+        $(this).text("댓글 더보기");
+        $(this).closest("div").find("ul").find(".comment").not(".newest-comment").hide();
+      }
+
+      msnry.reloadItems();
+      msnry.layout();
+    });
+
+  });
+</script>
 
