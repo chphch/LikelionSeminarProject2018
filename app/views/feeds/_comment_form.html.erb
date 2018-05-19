@@ -1,8 +1,13 @@
-<div class="mdl-grid--no-spacing">
-  <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col-desktop mdl-cell--5-col-tablet mdl-cell--3-col-phone">
-    <input class="mdl-textfield__input" type="text" name="content" id="content"></textarea>
-    <label class="mdl-textfield__label" for="content">댓글 작성하기</label>
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary"> 등록 </button>
-  </div>
+<div class="mdl-grid pb-0 pt-0">
+  <!--<form class="mdl-cell mdl-cell--12-col mb-0 mt-0" action="/feeds/<%#=f.id%>/comments" method="POST"> -->
+  <form class="mdl-cell mdl-cell--12-col mb-0 mt-0" action="/feeds/<%=id%>/comments" method="POST">
+    <div class="mdl-grid--no-spacing">
+      <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col-desktop mdl-cell--5-col-tablet mdl-cell--3-col-phone">
+        <input class="mdl-textfield__input" type="text" name="content" id="content"></textarea>
+        <label class="mdl-textfield__label" for="content">댓글 작성하기</label>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary"> 등록 </button>
+      </div>
+    </div>
+  </form>
 </div>
 
