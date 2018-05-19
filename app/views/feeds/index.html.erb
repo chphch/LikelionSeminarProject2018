@@ -54,21 +54,14 @@
         </li>
         <% end %>
       </ul>
-       
+
       <!-- 댓글 작성 -->
       <div class="mdl-grid pb-0 pt-0">
         <form class="mdl-cell mdl-cell--12-col mb-0 mt-0" action="/feeds/<%=f.id%>/comments" method="POST">
-          <div class="mdl-grid--no-spacing">
-            <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col-desktop mdl-cell--5-col-tablet mdl-cell--3-col-phone">
-              <input class="mdl-textfield__input" type="text" name="content" id="content"></textarea>
-              <label class="mdl-textfield__label" for="content">댓글 작성하기</label>
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
-                등록
-              </button>
-            </div>
-          </div>
+          <%= render partial: "comment_form" %>
         </form>
       </div>
+      <!-- 댓글작성 form 끝 -->
     </div>
 
     <!--
@@ -125,29 +118,27 @@
 </a>
 
 <script type="text/javascript">
+  // 댓글 더보기 --start--
   $(document).ready(function(){
-
     $("a.btn-more-comment").on("click", function(event){
-
       var msnry = Masonry.data(".js-grid")
-
       $(this).toggleClass("hiding-comment");
 
-      if($(this).hasClass("hiding-comment"))
-      {
+      if($(this).hasClass("hiding-comment")) {
         $(this).text("댓글 숨기기");
         $(this).closest("div").find("ul").find(".comment").not(".newest-comment").show();
-      }
-      else
-      {
+      } else {
         $(this).text("댓글 더보기");
         $(this).closest("div").find("ul").find(".comment").not(".newest-comment").hide();
       }
-
       msnry.reloadItems();
       msnry.layout();
     });
+  })
+  // 댓글 더보기 --end--
 
-  });
+  // ajax --start--
+
+  // ajax --end--
 </script>
 
