@@ -146,18 +146,19 @@
 
     $(document).ready(function(){
 
-        $("#btn-more-comment-1").on('click', function(){
+        $(".btn-more-comment").on('click', function(){
 
-            var btn_txt = $(this).text();
-            if(btn_txt === "댓글 더보기"){
+            $(this).toggleClass("hiding-comment");
 
-                $(".old-comment-1").show();
-                $(this).text("댓글 숨기기");
+            if($(this).hasClass("hiding-comment")){
+
+                $(this).siblings("ul").find(".comment").not(".newest-comment").show();
+                $(this).contents().get(0).nodeValue = "댓글 숨기기";
 
             } else {
 
-                $(".old-comment-1").hide();
-                $(this).text("댓글 더보기");
+                $(this).siblings("ul").find(".comment").not(".newest-comment").hide();
+                $(this).contents().get(0).nodeValue = "댓글 더보기";
 
             }
 
