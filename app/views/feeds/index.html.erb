@@ -56,11 +56,7 @@
       </ul>
 
       <!-- 댓글 작성 -->
-      <div class="mdl-grid pb-0 pt-0">
-        <form class="mdl-cell mdl-cell--12-col mb-0 mt-0" action="/feeds/<%=f.id%>/comments" method="POST">
-          <%= render partial: "comment_form" %>
-        </form>
-      </div>
+          <%= render partial: "comment_form", locals: {id: f.id} %>
       <!-- 댓글작성 form 끝 -->
     </div>
 
