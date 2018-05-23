@@ -46,7 +46,7 @@
           </span>
           <% if c.user == current_user %>
             <span class="mdl-list__item-secondary-content">
-              <%=link_to "/feeds/#{f.id}/comments/#{c.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+              <%=link_to "/feeds/#{f.id}/comments/#{c.id}", method: :delete, :class => "ajax-delete mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
                 <i class="material-icons">delete</i>
               <% end %>
             </span>
@@ -71,7 +71,7 @@
         <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500">
           <i class="material-icons">edit</i>
         </button>
-        <%=link_to "/feeds/#{f.id}", method: :delete, :class => "ajax-delete mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
+        <%=link_to "/feeds/#{f.id}", method: :delete, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-color-text--grey-500" do %>
           <i class="material-icons">delete</i>
         <% end %>
 
