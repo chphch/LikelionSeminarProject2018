@@ -136,10 +136,12 @@
   // ajax --start--
   $(document).ready(function(){
     $(".ajax-delete").on("click", function(event){
+      const feed_id = $(this).data("feed_id")
+      const comment_id = $(this).data("comment_id")
       $.ajax({
         type: "DELETE",
         dataType: "JSON",
-        url: ,
+        url: "/feeds/" + feed_id + "/comments/" + comment_id,
         data: {
         },
         success: function(data) {
