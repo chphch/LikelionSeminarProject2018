@@ -138,6 +138,8 @@
     $(".ajax-delete").on("click", function(event){
       const feed_id = $(this).data("feed-id")
       const comment_id = $(this).data("comment-id")
+      event.preventDefault()
+      event.stopPropagation();
       $.ajax({
         type: "DELETE",
         dataType: "JSON",
