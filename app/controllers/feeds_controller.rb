@@ -53,7 +53,8 @@ class FeedsController < ApplicationController
     comment_id = params[:comment_id]
     FeedComment.destroy(comment_id)
 
-    redirect_to action: 'index'
+    #redirect_to action: 'index'
+    render json: {}
   end
 
   def like
