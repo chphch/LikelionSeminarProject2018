@@ -138,6 +138,10 @@
     $(".ajax-delete").on("click", function(event){
       const feed_id = $(this).data("feed-id")
       const comment_id = $(this).data("comment-id")
+      const attr_class = $(this).parents().parents()
+      if (attr_class.hasClass("newest-comment")) {
+        attr_class.next('li').addClass('newest-comment')
+      }
       event.preventDefault()
       event.stopPropagation();
       $.ajax({
@@ -149,6 +153,7 @@
         success: function(data) {
           console.log("Comment Deleted")
           $(".comment" + comment_id).remove()
+          $(".newest-comment").removeAttr('style')
           return;
         }
       });
