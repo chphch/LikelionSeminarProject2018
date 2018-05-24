@@ -34,9 +34,9 @@
       <ul class="mdl-list no-margin no-padding">
         <% f.feed_comments.each_with_index do |c, i| %>
         <% if i == 0 %>
-         <li class="mdl-list__item comment newest-comment">
+          <li class="mdl-list__item comment comment<%=c.id%> newest-comment">
         <% else %>
-          <li class="mdl-list__item comment" style="display:none;">
+          <li class="mdl-list__item comment comment<%=c.id%>" style="display:none;">
         <% end %>
           <span class="mdl-list__item-primary-content">
             <p class="mdl-list__item-text-body mb-0">
@@ -136,8 +136,8 @@
   // ajax --start--
   $(document).ready(function(){
     $(".ajax-delete").on("click", function(event){
-      const feed_id = $(this).data("feed_id")
-      const comment_id = $(this).data("comment_id")
+      const feed_id = $(this).data("feed-id")
+      const comment_id = $(this).data("comment-id")
       $.ajax({
         type: "DELETE",
         dataType: "JSON",
