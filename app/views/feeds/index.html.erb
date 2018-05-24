@@ -145,6 +145,9 @@
         data: {
         },
         success: function(data) {
+          console.log("Comment Deleted")
+          $(".comment" + comment_id).remove()
+          $(".newest-comment").removeAttr('style')
           return;
         }
       });
